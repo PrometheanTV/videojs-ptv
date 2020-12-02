@@ -61,7 +61,7 @@ require(['video.js', '@ptv-plugin-vjs/videojs-ptv'], function(videojs) {
 
 ## License
 
-MIT. Copyright (c) Alexander Syed &lt;alexksyed@gmail.com&gt;
+MIT. Copyright (c) Promethean TV
 
 
 [videojs]: http://videojs.com/
