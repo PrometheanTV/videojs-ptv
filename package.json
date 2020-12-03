@@ -1,7 +1,7 @@
 {
   "name": "@ptv.js/videojs-ptv",
   "version": "0.0.0",
-  "description": "",
+  "description": "A video.js plugin to interface with the Promethean TV SDK through an iFrame embed API.",
   "main": "dist/videojs-ptv.cjs.js",
   "module": "dist/videojs-ptv.es.js",
   "generator-videojs-plugin": {

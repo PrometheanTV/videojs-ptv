@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+
 import PtvEmbed from './embed';
 import { ApiHosts, EmbedHosts, PlayerEvents } from './constants';
 import { version as VERSION } from '../package.json';
@@ -34,6 +35,20 @@ const defaults = {
  * See: https://blog.videojs.com/feature-spotlight-advanced-plugins/
  */
 class Ptv extends Plugin {
+  /**
+   * API hosts static types.
+   */
+  static get ApiHostType() {
+    return Object.assign({}, ApiHosts);
+  }
+
+  /**
+   * Embed hosts static types.
+   */
+  static get EmbedHostType() {
+    return Object.assign({}, EmbedHosts);
+  }
+
   /**
    * Create a Ptv plugin instance.
    *
