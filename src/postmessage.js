@@ -21,7 +21,7 @@ export function parseMessageData(data) {
 /**
  * Post a message to the specified target.
  *
- * @param {HTMLElement} iframe The player object to use.
+ * @param {PtvEmbed} iframe Instance of the PtvEmbed class.
  * @param {string} method The API method to call.
  * @param {Object} params The parameters to send to the player.
  * @return {void}
