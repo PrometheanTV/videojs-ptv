@@ -1,17 +1,18 @@
 import videojs from 'video.js';
 import PtvEmbed from './embed';
+import { ApiHosts, EmbedHosts, PlayerEvents } from './constants';
 import { version as VERSION } from '../package.json';
 
 const Plugin = videojs.getPlugin('plugin');
 
 // Default options for the plugin.
 const defaults = {
-  apiHost: 'broadcast.promethean.tv',
+  apiHost: ApiHosts.PRODUCTION,
   channelId: null,
   debug: true,
   domId: null,
   enableGeoBlock: false,
-  embedHost: 'embed.promethean.tv',
+  embedHost: EmbedHosts.PRODUCTION,
   excludePlayer: true,
   iframe: true,
   platformId: null,
@@ -25,14 +26,6 @@ const defaults = {
   viewerId: null,
   viewerLatitude: false,
   viewerLongitude: false
-};
-
-const PlayerEvents = {
-  ENDED: 'ended',
-  ERROR: 'error',
-  PAUSE: 'pause',
-  PLAY: 'play',
-  TIME_UPDATE: 'timeupdate'
 };
 
 /**

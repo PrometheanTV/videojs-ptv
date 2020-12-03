@@ -1,5 +1,7 @@
 import videojs from 'video.js';
 import window from 'global/window';
+
+import { SdkEvents } from './constants';
 import { parseMessageData, postMessage } from './postmessage';
 import { serialize } from './utils';
 
@@ -15,12 +17,6 @@ const requiredOptions = {
   embedHost: null,
   excludePlayer: true,
   iframe: true
-};
-
-const SdkEvents = {
-  CLICK_MISS: 'ptv.click.miss',
-  CONFIG_FAILURE: 'ptv.config.failure',
-  CONFIG_READY: 'ptv.config.ready'
 };
 
 /**
