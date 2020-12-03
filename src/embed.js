@@ -7,6 +7,7 @@ const PROTOCOL = 'https://';
 
 const defaultCallbacks = {
   onClickMiss: Function.prototype,
+  onConfigFailure: Function.prototype,
   onConfigReady: Function.prototype
 };
 
