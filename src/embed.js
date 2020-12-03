@@ -12,6 +12,7 @@ const defaultCallbacks = {
 };
 
 const requiredOptions = {
+  embedHost: null,
   excludePlayer: true,
   iframe: true
 };
@@ -37,7 +38,7 @@ class PtvEmbed {
    */
   constructor(options, callbacks) {
     const config = videojs.mergeOptions(options, requiredOptions);
-    const origin = PROTOCOL + config.embedHost;
+    const origin = PROTOCOL + options.embedHost;
 
     // Create iFrame.
     const el = window.document.createElement('iframe');
