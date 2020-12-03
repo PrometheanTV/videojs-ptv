@@ -182,6 +182,49 @@ class Ptv extends Plugin {
   }
 
   /**
+   * Event emitter `off` method.
+   *
+   * @param {string} eventName Event name.
+   */
+  off() {
+    if (this.embed) {
+      this.embed.off();
+    }
+  }
+
+  /**
+   * Event emitter `on` method.
+   *
+   * @param {string} eventName Event name.
+   */
+  on(eventName) {
+    if (this.embed) {
+      this.embed.on(eventName);
+    }
+  }
+
+  /**
+   * Event emitter `once` method.
+   * * @param {string} eventName Event name.
+   */
+  once(eventName) {
+    if (this.embed) {
+      this.embed.once(eventName);
+    }
+  }
+
+  /**
+   * Event emitter `removeAllListeners` method.
+   *
+   * @param {Array} eventNames Array of event names.
+   */
+  removeAllListeners(eventNames) {
+    if (this.embed) {
+      this.embed.removeAllListeners(eventNames);
+    }
+  }
+
+  /**
    * Show overlays.
    */
   show() {

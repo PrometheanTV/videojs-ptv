@@ -112,6 +112,38 @@ class PtvEmbed {
   }
 
   /**
+   * Event emitter `off` method.
+   * * @param {string} eventName Event name.
+   */
+  off(eventName) {
+    this.callMethod_('off', eventName);
+  }
+
+  /**
+   * Event emitter `on` method.
+   * * @param {string} eventName Event name.
+   */
+  on(eventName) {
+    this.callMethod_('on', eventName);
+  }
+
+  /**
+   * Event emitter `once` method.
+   * * * @param {string} eventName Event name.
+   */
+  once(eventName) {
+    this.callMethod_('once', eventName);
+  }
+
+  /**
+   * Event emitter `removeAllListeners` method.
+   * * @param {array} eventNames Array of event names.
+   */
+  removeAllListeners(eventNames) {
+    this.callMethod_('removeAllListeners', eventNames);
+  }
+
+  /**
    * Show overlays.
    */
   show() {
