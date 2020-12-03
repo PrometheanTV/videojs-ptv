@@ -1,27 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>videojs-ptv Demo</title>
-  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
-  <link href="dist/videojs-ptv.css" rel="stylesheet">
-</head>
-<body>
-  <video id="videojs-ptv-player" class="video-js vjs-default-skin" controls>
-    <source src="//vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-    <source src="//vjs.zencdn.net/v/oceans.webm" type='video/webm'>
-  </video>
-  <ul>
-    <li><a href="/test/debug.html">Run unit tests in browser.</a></li>
-    <li><a href="docs/api/">Read generated docs.</a></li>
-  </ul>
-  <script src="node_modules/video.js/dist/video.js"></script>
-  <script src="dist/videojs-ptv.js"></script>
-  <script>
-    (function(window, videojs) {
-      var examplePlayer = window.examplePlayer = videojs('videojs-ptv-player');
-      var ptv = window.ptv = examplePlayer.ptv();
-    }(window, window.videojs));
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>videojs-ptv Demo</title>
+    <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet" />
+    <link href="dist/videojs-ptv.css" rel="stylesheet" />
+  </head>
+  <body>
+    <video id="videojs-ptv-player" class="video-js vjs-default-skin" controls>
+      <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+      <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm" />
+    </video>
+    <ul>
+      <li><a href="/test/debug.html">Run unit tests in browser.</a></li>
+      <li><a href="docs/api/">Read generated docs.</a></li>
+    </ul>
+    <script src="node_modules/video.js/dist/video.js"></script>
+    <script src="dist/videojs-ptv.js"></script>
+    <script>
+      (function (window, videojs) {
+        var player = (window.player = videojs("videojs-ptv-player", {
+          // Toggle button to test click handling proxy
+          bigPlayButton: true,
+        }));
+
+        var ptv = (window.ptv = player.ptv({
+          apiHost: "broadcast.promethean.tv",
+          embedHost: "dev.embed.promethean.tv:4000",
+          channelId: "5c701be7dc3d20080e4092f4",
+          streamId: "5de7e7c2a6adde5211684519",
+          debug: true,
+          iframe: true,
+        }));
+      })(window, window.videojs);
+    </script>
+  </body>
 </html>
