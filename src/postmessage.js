@@ -1,6 +1,12 @@
 import window from 'global/window';
 
 /**
+ * Source identifier for post messages.
+ * @type {string}
+ */
+const source = '@ptv-host';
+
+/**
  * Parse a message received from postMessage.
  *
  * @param {*} data The data received from postMessage.
@@ -36,7 +42,7 @@ export function postMessage(iframe, method, params) {
     return;
   }
 
-  let message = { method };
+  let message = { method, source };
 
   if (params !== undefined) {
     message.value = params;
