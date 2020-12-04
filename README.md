@@ -1,5 +1,7 @@
 # videojs-ptv
 
+[![npm version](https://badge.fury.io/js/%40ptv.js%2Fvideojs-ptv.svg)](https://badge.fury.io/js/%40ptv.js%2Fvideojs-ptv)
+
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
