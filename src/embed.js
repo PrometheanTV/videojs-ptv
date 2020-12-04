@@ -189,6 +189,8 @@ class PtvEmbed {
   /**
    * Handles clicks that fall through to the root of the iFrame, indicating no
    * overlays were interacted with.
+   *
+   * @param {Object} message Message sent from iframe postMessage.
    */
   handleMessage_(message) {
     const { data, origin } = message;
