@@ -213,7 +213,8 @@ class Ptv extends Plugin {
 
   /**
    * Event emitter `once` method.
-   * * @param {string} eventName Event name.
+   *
+   * @param {string} eventName Event name.
    */
   once(eventName) {
     if (this.embed) {
