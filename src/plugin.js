@@ -118,11 +118,25 @@ class Ptv extends Plugin {
   /**
    * Handles SDK config loaded.
    *
-   * @param {Object} response Response from the PTV config API.
+   * @param {Object}  data Response from the PTV config API.
+   * @param {boolean} data.poster Poster set in the Promethean Ignite Video Platform.
+   * @param {string}  data.src Video source set in the Promethean Ignite Video Platform.
+   * @param {string}  data.type Video type set in the Promethean Ignite Video Platform.
    */
-  handleConfigReady_(response) {
+  handleConfigReady_({ poster, src, type }) {
+    // Start SDK if video already playing.
     if (!this.player.paused()) {
       this.start();
+    }
+
+    // Use poster from API.
+    if (this.options.showPoster && typeof poster === 'object') {
+      this.player.poster(poster.loading);
+    }
+
+    // Use video from API.
+    if (!this.player.src() && this.player.canPlayType(type)) {
+      this.player.src(src);
     }
   }
 

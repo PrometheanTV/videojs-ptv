@@ -9,7 +9,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Installation](#installation)
 - [Usage](#usage)
   - [`<script>` Tag](#script-tag)
@@ -38,9 +37,9 @@ This is the simplest case. Get the script in whatever way you prefer and include
 
 ```html
 <!-- Path to videojs (example for v7.10.2) -->
-<script src="//cdn.jsdelivr.net/npm/video.js@7.10.2/dist/video.min.js"></script>
+<script src="//unpkg.com/video.js@7.10.2/dist/video.min.js"></script>
 <!-- Path to videojs-ptv (example for v1.0.0) -->
-<script src="//cdn.jsdelivr.net/npm/@ptv.js/videojs-ptv@1.0.0/dist/videojs-ptv.min.js"></script>
+<script src="//unpkg.com/@ptv.js/videojs-ptv@1.0.0/dist/videojs-ptv.min.js"></script>
 <script>
   var player = videojs("my-video");
 
