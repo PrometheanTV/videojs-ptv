@@ -42,6 +42,18 @@ class PtvEmbed {
     el.className = 'ptv-iframe';
     el.setAttribute('src', origin + '?' + serialize(config));
 
+    // Set iFrame CSS styles.
+    el.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      border: none;
+    `;
+
     // Store element to instance.
     this.el_ = el;
     this.el_.onload = this.onLoad_.bind(this);
