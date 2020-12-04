@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40ptv.js%2Fvideojs-ptv.svg)](https://badge.fury.io/js/%40ptv.js%2Fvideojs-ptv)
 [![](https://data.jsdelivr.com/v1/package/npm/@ptv.js/videojs-ptv/badge)](https://www.jsdelivr.com/package/npm/@ptv.js/videojs-ptv)
+![npm publish](https://github.com/PrometheanTV/videojs-ptv/workflows/npm%20publish/badge.svg)
 
 ## Table of Contents
 
