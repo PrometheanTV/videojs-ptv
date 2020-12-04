@@ -1,22 +1,22 @@
-import videojs from 'video.js';
-import window from 'global/window';
+import videojs from "video.js";
+import window from "global/window";
 
-import { SdkEvents } from './constants';
-import { parseMessageData, postMessage } from './postmessage';
-import { serialize } from './utils';
+import { SdkEvents } from "./constants";
+import { parseMessageData, postMessage } from "./postmessage";
+import { serialize } from "./utils";
 
-const PROTOCOL = 'https://';
+const PROTOCOL = "https://";
 
 const defaultCallbacks = {
   onClickMiss: Function.prototype,
   onConfigFailure: Function.prototype,
-  onConfigReady: Function.prototype
+  onConfigReady: Function.prototype,
 };
 
 const requiredOptions = {
   embedHost: null,
   excludePlayer: true,
-  iframe: true
+  iframe: true,
 };
 
 /**
@@ -37,10 +37,22 @@ class PtvEmbed {
     const origin = PROTOCOL + options.embedHost;
 
     // Create iFrame.
-    const el = window.document.createElement('iframe');
+    const el = window.document.createElement("iframe");
 
-    el.className = 'ptv-iframe';
-    el.setAttribute('src', origin + '?' + serialize(config));
+    el.className = "ptv-iframe";
+    el.setAttribute("src", origin + "?" + serialize(config));
+
+    // Set iFrame CSS styles.
+    el.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      border: none;
+    `;
 
     // Store element to instance.
     this.el_ = el;
@@ -53,7 +65,7 @@ class PtvEmbed {
     this.callbacks_ = videojs.mergeOptions(defaultCallbacks, callbacks);
 
     // Setup post message interface.
-    window.addEventListener('message', this.handleMessage_.bind(this));
+    window.addEventListener("message", this.handleMessage_.bind(this));
 
     return this;
   }
@@ -97,7 +109,7 @@ class PtvEmbed {
    * Hide overlays.
    */
   hide() {
-    this.callMethod_('hide');
+    this.callMethod_("hide");
   }
 
   /**
@@ -106,7 +118,7 @@ class PtvEmbed {
    * @param {Object} config Config object passed to ptv.js
    */
   load(config) {
-    this.callMethod_('load', config);
+    this.callMethod_("load", config);
   }
 
   /**
@@ -115,7 +127,7 @@ class PtvEmbed {
    * @param {string} eventName Event name.
    */
   off(eventName) {
-    this.callMethod_('off', eventName);
+    this.callMethod_("off", eventName);
   }
 
   /**
@@ -124,7 +136,7 @@ class PtvEmbed {
    * @param {string} eventName Event name.
    */
   on(eventName) {
-    this.callMethod_('on', eventName);
+    this.callMethod_("on", eventName);
   }
 
   /**
@@ -133,7 +145,7 @@ class PtvEmbed {
    * @param {string} eventName Event name.
    */
   once(eventName) {
-    this.callMethod_('once', eventName);
+    this.callMethod_("once", eventName);
   }
 
   /**
@@ -142,28 +154,28 @@ class PtvEmbed {
    * @param {Array} eventNames Array of event names.
    */
   removeAllListeners(eventNames) {
-    this.callMethod_('removeAllListeners', eventNames);
+    this.callMethod_("removeAllListeners", eventNames);
   }
 
   /**
    * Show overlays.
    */
   show() {
-    this.callMethod_('show');
+    this.callMethod_("show");
   }
 
   /**
    * Start and show overlays.
    */
   start() {
-    this.callMethod_('start');
+    this.callMethod_("start");
   }
 
   /**
    * Stop and hide overlays.
    */
   stop() {
-    this.callMethod_('stop');
+    this.callMethod_("stop");
   }
 
   /**
@@ -172,7 +184,7 @@ class PtvEmbed {
    * @param {number} seconds Player playhead in seconds.
    */
   timeUpdate(seconds) {
-    this.callMethod_('timeUpdate', seconds);
+    this.callMethod_("timeUpdate", seconds);
   }
 
   /**
@@ -199,16 +211,16 @@ class PtvEmbed {
       const payload = parseMessageData(data);
 
       switch (payload.type) {
-      case SdkEvents.CONFIG_READY:
-        this.callbacks.onConfigReady(payload.data);
-        break;
+        case SdkEvents.CONFIG_READY:
+          this.callbacks.onConfigReady(payload.data);
+          break;
 
-      case SdkEvents.CLICK_MISS:
-        this.callbacks.onClickMiss();
-        break;
+        case SdkEvents.CLICK_MISS:
+          this.callbacks.onClickMiss();
+          break;
 
-      default:
-        return;
+        default:
+          return;
       }
     }
   }
@@ -220,7 +232,7 @@ class PtvEmbed {
    */
   onLoad_() {
     try {
-      if (this.el.contentDocument.body.innerText === 'NOT FOUND') {
+      if (this.el.contentDocument.body.innerText === "NOT FOUND") {
         this.destroy();
       }
     } catch (e) {
