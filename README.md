@@ -92,6 +92,10 @@ require(["video.js", "@ptv.js/videojs-ptv"], function (videojs) {
 });
 ```
 
+## Examples
+
+- [Basic JSFiddle example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+
 ## Documentation
 
 Please reference the [Web SDK documentation](https://docs.promethean.tv/developer-sdk/integration-guide-web) for more information about the SDK.
