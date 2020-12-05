@@ -38,8 +38,8 @@ This is the simplest case. Get the script in whatever way you prefer and include
 ```html
 <!-- Path to videojs (example for v7.10.2) -->
 <script src="//unpkg.com/video.js@7.10.2/dist/video.min.js"></script>
-<!-- Path to videojs-ptv (example for v1.0.0) -->
-<script src="//unpkg.com/@ptv.js/videojs-ptv@1.0.0/dist/videojs-ptv.min.js"></script>
+<!-- Path to videojs-ptv (example for v1.1.1) -->
+<script src="//unpkg.com/@ptv.js/videojs-ptv@1.1.1/dist/videojs-ptv.min.js"></script>
 <script>
   var player = videojs("my-video");
 
