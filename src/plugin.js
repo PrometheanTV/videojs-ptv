@@ -16,23 +16,24 @@ const Plugin = videojs.getPlugin("plugin");
 const defaults = {
   apiHost: ApiHosts.PRODUCTION,
   channelId: null,
-  debug: true,
-  domId: null,
+  debug: false,
   enableGeoBlock: false,
   embedHost: EmbedHosts.PRODUCTION,
-  excludePlayer: true,
-  iframe: true,
   platformId: null,
   platformName: null,
   platformType: null,
   previewMode: false,
   showDebugPanel: false,
-  showPoster: true,
-  showTimeUpdate: false,
+  showPoster: false,
   streamId: null,
   viewerId: null,
-  viewerLatitude: false,
-  viewerLongitude: false,
+  viewerLatitude: null,
+  viewerLongitude: null,
+};
+
+const defaultState = {
+  configReady: false,
+  configFailure: false,
 };
 
 /**
@@ -41,34 +42,6 @@ const defaults = {
  * See: https://blog.videojs.com/feature-spotlight-advanced-plugins/
  */
 class Ptv extends Plugin {
-  /**
-   * API hosts static types.
-   */
-  static get ApiHostType() {
-    return Object.assign({}, ApiHosts);
-  }
-
-  /**
-   * Embed hosts static types.
-   */
-  static get EmbedHostType() {
-    return Object.assign({}, EmbedHosts);
-  }
-
-  /**
-   * Platform name static types.
-   */
-  static get PlatformNameType() {
-    return Object.assign({}, PlatformNames);
-  }
-
-  /**
-   * Platform type static types.
-   */
-  static get PlatformTypeType() {
-    return Object.assign({}, PlatformTypes);
-  }
-
   /**
    * Create a Ptv plugin instance.
    *
@@ -130,6 +103,8 @@ class Ptv extends Plugin {
    * @param {Object} response Response from the PTV config API.
    */
   handleConfigFailure_(response) {
+    this.setState({ configFailure: true });
+
     if (this.embed) {
       this.embed.destroy();
     }
@@ -144,6 +119,8 @@ class Ptv extends Plugin {
    * @param {string}  data.type Video type set in the Promethean Ignite Video Platform.
    */
   handleConfigReady_({ poster, src, type }) {
+    this.setState({ configReady: true });
+
     // Start SDK if video already playing.
     if (!this.player.paused()) {
       this.start();
@@ -219,6 +196,8 @@ class Ptv extends Plugin {
    * @param {Object} config Config object passed to ptv.js
    */
   load(config) {
+    this.setState(defaultState);
+
     if (this.embed) {
       this.embed.load(config);
     }
@@ -263,8 +242,14 @@ class Ptv extends Plugin {
   }
 }
 
+// Export a few static types.
+Ptv.ApiHosts = ApiHosts;
+Ptv.EmbedHosts = EmbedHosts;
+Ptv.PlatformNames = PlatformNames;
+Ptv.PlatformTypes = PlatformTypes;
+
 // Define default values for the plugin's `state` object here.
-Ptv.defaultState = {};
+Ptv.defaultState = defaultState;
 
 // Include the version number.
 Ptv.VERSION = VERSION;
