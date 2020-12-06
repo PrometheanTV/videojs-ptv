@@ -139,14 +139,14 @@ The plugin provides a few top-level static types to help construct the configura
 
 The plugin provides a top-level API to interact with SDK.
 
-| Method       | Description                                                | Arguments                   | Usage                            |
-| ------------ | ---------------------------------------------------------- | --------------------------- | -------------------------------- |
-| `hide`       | Hides all overlays                                         |                             | `window.ptv.hide()`              |
-| `load`       | Removes current overlays and loads new overlays            | (see configuration options) | `window.ptv.load(config)`        |
-| `show`       | Shows all overlays                                         |                             | `window.ptv.show()`              |
-| `start`      | Starts the overlay rendering engine and shows all overlays |                             | `window.ptv.start()`             |
-| `stop`       | Stops the overlay rendering engine and hides all overlays  |                             | `window.ptv.stop()`              |
-| `timeUpdate` | Update the player time in seconds.                         | `number` in seconds         | `window.ptv.timeUpdate(seconds)` |
+| Method       | Description                                                | Arguments                   | Usage                     |
+| ------------ | ---------------------------------------------------------- | --------------------------- | ------------------------- |
+| `hide`       | Hides all overlays                                         |                             | `ptv.hide()`              |
+| `load`       | Removes current overlays and loads new overlays            | (see configuration options) | `ptv.load(config)`        |
+| `show`       | Shows all overlays                                         |                             | `ptv.show()`              |
+| `start`      | Starts the overlay rendering engine and shows all overlays |                             | `ptv.start()`             |
+| `stop`       | Stops the overlay rendering engine and hides all overlays  |                             | `ptv.stop()`              |
+| `timeUpdate` | Update the player time in seconds.                         | `number` in seconds         | `ptv.timeUpdate(seconds)` |
 
 ## License
 
