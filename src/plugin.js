@@ -1,10 +1,16 @@
-import videojs from 'video.js';
+import videojs from "video.js";
 
-import PtvEmbed from './embed';
-import { ApiHosts, EmbedHosts, PlayerEvents } from './constants';
-import { version as VERSION } from '../package.json';
+import PtvEmbed from "./embed";
+import {
+  ApiHosts,
+  EmbedHosts,
+  PlatformNames,
+  PlatformTypes,
+  PlayerEvents,
+} from "./constants";
+import { version as VERSION } from "../package.json";
 
-const Plugin = videojs.getPlugin('plugin');
+const Plugin = videojs.getPlugin("plugin");
 
 // Default options for the plugin.
 const defaults = {
@@ -26,7 +32,7 @@ const defaults = {
   streamId: null,
   viewerId: null,
   viewerLatitude: false,
-  viewerLongitude: false
+  viewerLongitude: false,
 };
 
 /**
@@ -47,6 +53,20 @@ class Ptv extends Plugin {
    */
   static get EmbedHostType() {
     return Object.assign({}, EmbedHosts);
+  }
+
+  /**
+   * Platform name static types.
+   */
+  static get PlatformNameType() {
+    return Object.assign({}, PlatformNames);
+  }
+
+  /**
+   * Platform type static types.
+   */
+  static get PlatformTypeType() {
+    return Object.assign({}, PlatformTypes);
   }
 
   /**
@@ -82,10 +102,10 @@ class Ptv extends Plugin {
     const callbacks = {
       onClickMiss: this.handleClickMiss_.bind(this),
       onConfigReady: this.handleConfigReady_.bind(this),
-      onConfigFailure: this.handleConfigFailure_.bind(this)
+      onConfigFailure: this.handleConfigFailure_.bind(this),
     };
 
-    this.player.addClass('vjs-ptv');
+    this.player.addClass("vjs-ptv");
 
     // Create iframe instance.
     this.embed = new PtvEmbed(this.options, callbacks);
@@ -130,11 +150,11 @@ class Ptv extends Plugin {
     }
 
     // Use poster from API.
-    if (this.options.showPoster && typeof poster === 'object') {
+    if (this.options.showPoster && typeof poster === "object") {
       this.player.poster(poster.loading);
     }
 
-    // Use video from API.
+    // Use video from API, if no video playing.
     if (!this.player.src() && this.player.canPlayType(type)) {
       this.player.src(src);
     }
@@ -162,7 +182,8 @@ class Ptv extends Plugin {
     this.player.on(PlayerEvents.PAUSE, () => this.hide());
     this.player.on(PlayerEvents.PLAY, () => this.show());
     this.player.on(PlayerEvents.TIME_UPDATE, () =>
-      this.timeUpdate(this.player.currentTime()));
+      this.timeUpdate(this.player.currentTime())
+    );
   }
 
   /**
@@ -174,7 +195,7 @@ class Ptv extends Plugin {
       PlayerEvents.ERROR,
       PlayerEvents.PAUSE,
       PlayerEvents.PLAY,
-      PlayerEvents.TIME_UPDATE
+      PlayerEvents.TIME_UPDATE,
     ]);
   }
 
@@ -200,50 +221,6 @@ class Ptv extends Plugin {
   load(config) {
     if (this.embed) {
       this.embed.load(config);
-    }
-  }
-
-  /**
-   * Event emitter `off` method.
-   *
-   * @param {string} eventName Event name.
-   */
-  off() {
-    if (this.embed) {
-      this.embed.off();
-    }
-  }
-
-  /**
-   * Event emitter `on` method.
-   *
-   * @param {string} eventName Event name.
-   */
-  on(eventName) {
-    if (this.embed) {
-      this.embed.on(eventName);
-    }
-  }
-
-  /**
-   * Event emitter `once` method.
-   *
-   * @param {string} eventName Event name.
-   */
-  once(eventName) {
-    if (this.embed) {
-      this.embed.once(eventName);
-    }
-  }
-
-  /**
-   * Event emitter `removeAllListeners` method.
-   *
-   * @param {Array} eventNames Array of event names.
-   */
-  removeAllListeners(eventNames) {
-    if (this.embed) {
-      this.embed.removeAllListeners(eventNames);
     }
   }
 
@@ -293,6 +270,6 @@ Ptv.defaultState = {};
 Ptv.VERSION = VERSION;
 
 // Register the plugin with video.js.
-videojs.registerPlugin('ptv', Ptv);
+videojs.registerPlugin("ptv", Ptv);
 
 export default Ptv;
