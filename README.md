@@ -39,7 +39,7 @@ This is the simplest case. Get the script in whatever way you prefer and include
 <!-- Path to videojs (example for v7.10.2) -->
 <script src="//cdn.jsdelivr.net/npm/video.js@7.10.2/dist/video.min.js"></script>
 <!-- Path to videojs-ptv (example for v1.2.0) -->
-<script src="//cdn.jsdelivr.net/npm/@ptv.js/videojs-ptv@1.1.0/dist/videojs-ptv.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@ptv.js/videojs-ptv@1.2.0/dist/videojs-ptv.min.js"></script>
 <script>
   var player = videojs("my-video");
 
