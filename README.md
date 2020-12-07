@@ -94,7 +94,8 @@ require(["video.js", "@ptv.js/videojs-ptv"], function (videojs) {
 
 ## Examples
 
-- [Basic JSFiddle example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+- [Basic <script> tag example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+- [Basic ES6 import example](https://codesandbox.io/s/videojs-ptv-msso0)
 
 ## Documentation
 
