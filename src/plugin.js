@@ -99,11 +99,9 @@ class Ptv extends Plugin {
   }
 
   /**
-   * Handles SDK config loaded.
-   *
-   * @param {Object} response Response from the PTV config API.
+   * Handles SDK config failure.
    */
-  handleConfigFailure_(response) {
+  handleConfigFailure_() {
     this.setState({ configFailure: true });
 
     if (this.embed) {
