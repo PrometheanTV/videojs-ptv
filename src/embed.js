@@ -211,6 +211,10 @@ class PtvEmbed {
       const payload = parseMessageData(data);
 
       switch (payload.type) {
+      case SdkEvents.CONFIG_FAILURE:
+        this.callbacks.onConfigFailure();
+        break;
+
       case SdkEvents.CONFIG_READY:
         this.callbacks.onConfigReady(payload.data);
         break;

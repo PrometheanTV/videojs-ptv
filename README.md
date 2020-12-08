@@ -37,9 +37,9 @@ This is the simplest case. Get the script in whatever way you prefer and include
 
 ```html
 <!-- Path to videojs (example for v7.10.2) -->
-<script src="//unpkg.com/video.js@7.10.2/dist/video.min.js"></script>
-<!-- Path to videojs-ptv (example for v1.0.0) -->
-<script src="//unpkg.com/@ptv.js/videojs-ptv@1.0.0/dist/videojs-ptv.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/video.js@7.10.2/dist/video.min.js"></script>
+<!-- Path to videojs-ptv (example for v1.2.0) -->
+<script src="//cdn.jsdelivr.net/npm/@ptv.js/videojs-ptv@1.2.0/dist/videojs-ptv.min.js"></script>
 <script>
   var player = videojs("my-video");
 
@@ -49,7 +49,7 @@ This is the simplest case. Get the script in whatever way you prefer and include
     streamId: "your-stream-id",
   };
 
-  player.ptv(config);
+  var ptv = player.ptv(config);
 </script>
 ```
 
@@ -71,7 +71,7 @@ var config = {
   streamId: "your-stream-id",
 };
 
-player.ptv(config);
+var ptv = player.ptv(config);
 ```
 
 ### RequireJS/AMD
@@ -88,54 +88,66 @@ require(["video.js", "@ptv.js/videojs-ptv"], function (videojs) {
     streamId: "your-stream-id",
   };
 
-  player.ptv(config);
+  var ptv = player.ptv(config);
 });
 ```
 
 ## Examples
 
-- [Basic JSFiddle example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+- [Basic <script> tag example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+- [Basic ES6 import example](https://codesandbox.io/s/videojs-ptv-msso0)
 
 ## Documentation
 
 Please reference the [Web SDK documentation](https://docs.promethean.tv/developer-sdk/integration-guide-web) for more information about the SDK.
 
-### Plugin options Options
+### Plugin Options
 
 You may pass in an options object to the plugin upon initialization. This object may contain any of the following properties:
 
-| Name               | Description                                                       | Type      | Default | Example  |
-| ------------------ | ----------------------------------------------------------------- | --------- | ------- | -------- |
-| `apiHost`          | Api host url override for testing                                 | `String`  | `null`  |          |
-| `channelId`        | Identifier of the Promethean channel                              | `String`  | `null`  |          |
-| `debug`            | Whether to show debug messages in the console                     | `Boolean` | `false` |          |
-| `embedHost`        | Embed host url override for testing                               | `String`  | `null`  |          |
-| `enableGeoBlock`   | Enable geo-blocking, useful for GDPR.                             | `Boolean` | `false` |          |
-| `loadingPosterUrl` | Specify a loading poster url, overrides Broadcast Center setting. | `String`  | `null`  |          |
-| `offlinePosterUrl` | Specify a offline poster url, overrides Broadcast Center setting. | `String`  | `null`  |          |
-| `platformId`       | Vendor CMS platform identifier                                    | `String`  | `null`  |          |
-| `platformName`     | Vendor CMS name                                                   | `String`  | `null`  | `truetv` |
-| `platformType`     | Vendor CMS platform key                                           | `String`  | `null`  | `cmsid`  |
-| `previewMode`      | Whether to show overlays for in preview mode                      | `Boolean` | `false` |          |
-| `showOverlays`     | Whether to initially show overlays on load                        | `Boolean` | `false` |          |
-| `showPoster`       | Whether to show poster on load and when offline                   | `Boolean` | `true`  |          |
-| `streamId`         | Identifier of the Promethean stream                               | `String`  | `null`  |          |
-| `viewerId`         | Identifier of the viewer                                          | `String`  | `null`  |          |
-| `viewerLatitude`   | Geographic latitude of the viewer                                 | `String`  | `null`  |          |
-| `viewerLongitude`  | Geographic longitude of the viewer                                | `String`  | `null`  |          |
+| Name               | Description                                                       | Type      | Default | Example                         |
+| ------------------ | ----------------------------------------------------------------- | --------- | ------- | ------------------------------- |
+| `apiHost`          | Api host url override for testing                                 | `String`  | `null`  |                                 |
+| `channelId`        | Identifier of the Promethean channel                              | `String`  | `null`  |                                 |
+| `debug`            | Whether to show debug messages in the console                     | `Boolean` | `false` |                                 |
+| `embedHost`        | Embed host url override for testing                               | `String`  | `null`  |                                 |
+| `enableGeoBlock`   | Enable geo-blocking, useful for GDPR.                             | `Boolean` | `false` |                                 |
+| `loadingPosterUrl` | Specify a loading poster url, overrides Broadcast Center setting. | `String`  | `null`  |                                 |
+| `offlinePosterUrl` | Specify a offline poster url, overrides Broadcast Center setting. | `String`  | `null`  |                                 |
+| `platformId`       | Vendor CMS platform identifier                                    | `String`  | `null`  |                                 |
+| `platformName`     | Vendor CMS name                                                   | `String`  | `null`  | `PtvTypes.PlatformNames.TRUE`   |
+| `platformType`     | Vendor CMS platform key                                           | `String`  | `null`  | `PtvTypes.PlatformTypes.CMS_ID` |
+| `previewMode`      | Whether to show overlays for in preview mode                      | `Boolean` | `false` |                                 |
+| `showOverlays`     | Whether to initially show overlays on load                        | `Boolean` | `false` |                                 |
+| `showPoster`       | Whether to show poster on load and when offline                   | `Boolean` | `false` |                                 |
+| `streamId`         | Identifier of the Promethean stream                               | `String`  | `null`  |                                 |
+| `viewerId`         | Identifier of the viewer                                          | `String`  | `null`  |                                 |
+| `viewerLatitude`   | Geographic latitude of the viewer                                 | `String`  | `null`  |                                 |
+| `viewerLongitude`  | Geographic longitude of the viewer                                | `String`  | `null`  |                                 |
 
-## API
+## Static Types
 
-The plugin provides a top-level API to interact with SDK.
+The plugin provides a few top-level static types to help construct the configuration options. The types can be access on the window global `window.PtvTypes` or as a named import (e.g. `import { PtvTypes } from '@ptv.js/videojs-ptv'`).
 
-| Method       | Description                                                | Arguments                                                          | Usage                            |
-| ------------ | ---------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------- |
-| `hide`       | Hides all overlays                                         |                                                                    | `window.ptv.hide()`              |
-| `load`       | Removes current overlays and loads new overlays            | `object` containing `channelId`, `platform` props , and `streamId` | `window.ptv.load(config)`        |
-| `show`       | Shows all overlays                                         |                                                                    | `window.ptv.show()`              |
-| `start`      | Starts the overlay rendering engine and shows all overlays |                                                                    | `window.ptv.start()`             |
-| `stop`       | Stops the overlay rendering engine and hides all overlays  |                                                                    | `window.ptv.stop()`              |
-| `timeUpdate` | Update the player time in seconds.                         | `number` in seconds                                                | `window.ptv.timeUpdate(seconds)` |
+| Name            | Description                               | Usage                                                   |
+| --------------- | ----------------------------------------- | ------------------------------------------------------- |
+| `ApiHosts`      | API hosts for testing                     | `PtvTypes.ApiHosts.<COMDEV\|QA\|STAGING\|PRODUCTION>`   |
+| `EmbedHosts`    | Embed hosts for testing                   | `PtvTypes.EmbedHosts.<COMDEV\|QA\|STAGING\|PRODUCTION>` |
+| `PlatformNames` | Platform names for integrated partner CMS | `PtvTypes.PlatformNames.<TRUE>`                         |
+| `PlatformTypes` | Platform types for integrated partner CMS | `PtvTypes.PlatformTypes.<CMS_ID>`                       |
+
+## High-level API
+
+The plugin provides a top-level API to manually interact with the SDK.
+
+| Method       | Description                                                | Arguments                   | Usage                     |
+| ------------ | ---------------------------------------------------------- | --------------------------- | ------------------------- |
+| `hide`       | Hides all overlays                                         |                             | `ptv.hide()`              |
+| `load`       | Removes current overlays and loads new overlays            | (see configuration options) | `ptv.load(config)`        |
+| `show`       | Shows all overlays                                         |                             | `ptv.show()`              |
+| `start`      | Starts the overlay rendering engine and shows all overlays |                             | `ptv.start()`             |
+| `stop`       | Stops the overlay rendering engine and hides all overlays  |                             | `ptv.stop()`              |
+| `timeUpdate` | Update the player time in seconds.                         | `number` in seconds         | `ptv.timeUpdate(seconds)` |
 
 ## License
 

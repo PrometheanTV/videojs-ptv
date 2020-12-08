@@ -1,15 +1,19 @@
 /**
  * API hosts.
+ * @typedef {Object} ApiHosts
+ * @enum
  */
 export const ApiHosts = Object.freeze({
-  COMDEV: 'comdev.broadcast.promethean.tv',
-  QA: 'qa.broadcast.promethean.tv',
-  STAGING: 'staging.broadcast.promethean.tv',
-  PRODUCTION: 'broadcast.promethean.tv'
+  COMDEV: 'comdev',
+  QA: 'qa',
+  STAGING: 'staging',
+  PRODUCTION: 'prod'
 });
 
 /**
  * Embed hosts.
+ * @typedef {Object} EmbedHosts
+ * @enum
  */
 export const EmbedHosts = Object.freeze({
   COMDEV: 'comdev.embed.promethean.tv',
@@ -19,7 +23,27 @@ export const EmbedHosts = Object.freeze({
 });
 
 /**
+ * Platform names.
+ * @typedef {Object} PlatformNames
+ * @enum
+ */
+export const PlatformNames = Object.freeze({
+  TRUE: 'truetv'
+});
+
+/**
+ * Platform types.
+ * @typedef {Object} PlatformTypes
+ * @enum
+ */
+export const PlatformTypes = Object.freeze({
+  CMS_ID: 'cmsid'
+});
+
+/**
  * Player events.
+ * @typedef {Object} PlayerEvents
+ * @enum
  */
 export const PlayerEvents = Object.freeze({
   ENDED: 'ended',
@@ -31,6 +55,8 @@ export const PlayerEvents = Object.freeze({
 
 /**
  * PTV SDK events.
+ * @typedef {Object} SdkEvents
+ * @enum
  */
 export const SdkEvents = Object.freeze({
   CLICK_MISS: 'ptv.click.miss',
