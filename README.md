@@ -37,9 +37,9 @@ This is the simplest case. Get the script in whatever way you prefer and include
 
 ```html
 <!-- Path to videojs (example for v7.10.2) -->
-<script src="//unpkg.com/video.js@7.10.2/dist/video.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/video.js@7.10.2/dist/video.min.js"></script>
 <!-- Path to videojs-ptv (example for v1.2.0) -->
-<script src="//unpkg.com/@ptv.js/videojs-ptv@1.2.0/dist/videojs-ptv.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@ptv.js/videojs-ptv@1.2.0/dist/videojs-ptv.min.js"></script>
 <script>
   var player = videojs("my-video");
 
@@ -94,7 +94,8 @@ require(["video.js", "@ptv.js/videojs-ptv"], function (videojs) {
 
 ## Examples
 
-- [Basic JSFiddle example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+- [Basic <script> tag example](https://jsfiddle.net/ptvandi/5o6neLbr/)
+- [Basic ES6 import example](https://codesandbox.io/s/videojs-ptv-msso0)
 
 ## Documentation
 
@@ -137,7 +138,7 @@ The plugin provides a few top-level static types to help construct the configura
 
 ## High-level API
 
-The plugin provides a top-level API to interact with SDK.
+The plugin provides a top-level API to manually interact with the SDK.
 
 | Method       | Description                                                | Arguments                   | Usage                     |
 | ------------ | ---------------------------------------------------------- | --------------------------- | ------------------------- |
