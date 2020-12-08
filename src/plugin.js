@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import window from 'global/window';
 
 import PtvEmbed from './embed';
 import {
@@ -241,12 +242,6 @@ class Ptv extends Plugin {
   }
 }
 
-// Export a few static types.
-Ptv.ApiHosts = ApiHosts;
-Ptv.EmbedHosts = EmbedHosts;
-Ptv.PlatformNames = PlatformNames;
-Ptv.PlatformTypes = PlatformTypes;
-
 // Define default values for the plugin's `state` object here.
 Ptv.defaultState = defaultState;
 
@@ -255,5 +250,13 @@ Ptv.VERSION = VERSION;
 
 // Register the plugin with video.js.
 videojs.registerPlugin('ptv', Ptv);
+
+// Create and export static types.
+export const PtvTypes = (window.PtvTypes = {
+  ApiHosts,
+  EmbedHosts,
+  PlatformNames,
+  PlatformTypes
+});
 
 export default Ptv;

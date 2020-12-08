@@ -104,36 +104,36 @@ Please reference the [Web SDK documentation](https://docs.promethean.tv/develope
 
 You may pass in an options object to the plugin upon initialization. This object may contain any of the following properties:
 
-| Name               | Description                                                       | Type      | Default | Example                           |
-| ------------------ | ----------------------------------------------------------------- | --------- | ------- | --------------------------------- |
-| `apiHost`          | Api host url override for testing                                 | `String`  | `null`  |                                   |
-| `channelId`        | Identifier of the Promethean channel                              | `String`  | `null`  |                                   |
-| `debug`            | Whether to show debug messages in the console                     | `Boolean` | `false` |                                   |
-| `embedHost`        | Embed host url override for testing                               | `String`  | `null`  |                                   |
-| `enableGeoBlock`   | Enable geo-blocking, useful for GDPR.                             | `Boolean` | `false` |                                   |
-| `loadingPosterUrl` | Specify a loading poster url, overrides Broadcast Center setting. | `String`  | `null`  |                                   |
-| `offlinePosterUrl` | Specify a offline poster url, overrides Broadcast Center setting. | `String`  | `null`  |                                   |
-| `platformId`       | Vendor CMS platform identifier                                    | `String`  | `null`  |                                   |
-| `platformName`     | Vendor CMS name                                                   | `String`  | `null`  | `videojsPtv.PlatformNames.TRUE`   |
-| `platformType`     | Vendor CMS platform key                                           | `String`  | `null`  | `videojsPtv.PlatformTypes.CMS_ID` |
-| `previewMode`      | Whether to show overlays for in preview mode                      | `Boolean` | `false` |                                   |
-| `showOverlays`     | Whether to initially show overlays on load                        | `Boolean` | `false` |                                   |
-| `showPoster`       | Whether to show poster on load and when offline                   | `Boolean` | `false` |                                   |
-| `streamId`         | Identifier of the Promethean stream                               | `String`  | `null`  |                                   |
-| `viewerId`         | Identifier of the viewer                                          | `String`  | `null`  |                                   |
-| `viewerLatitude`   | Geographic latitude of the viewer                                 | `String`  | `null`  |                                   |
-| `viewerLongitude`  | Geographic longitude of the viewer                                | `String`  | `null`  |                                   |
+| Name               | Description                                                       | Type      | Default | Example                         |
+| ------------------ | ----------------------------------------------------------------- | --------- | ------- | ------------------------------- |
+| `apiHost`          | Api host url override for testing                                 | `String`  | `null`  |                                 |
+| `channelId`        | Identifier of the Promethean channel                              | `String`  | `null`  |                                 |
+| `debug`            | Whether to show debug messages in the console                     | `Boolean` | `false` |                                 |
+| `embedHost`        | Embed host url override for testing                               | `String`  | `null`  |                                 |
+| `enableGeoBlock`   | Enable geo-blocking, useful for GDPR.                             | `Boolean` | `false` |                                 |
+| `loadingPosterUrl` | Specify a loading poster url, overrides Broadcast Center setting. | `String`  | `null`  |                                 |
+| `offlinePosterUrl` | Specify a offline poster url, overrides Broadcast Center setting. | `String`  | `null`  |                                 |
+| `platformId`       | Vendor CMS platform identifier                                    | `String`  | `null`  |                                 |
+| `platformName`     | Vendor CMS name                                                   | `String`  | `null`  | `PtvTypes.PlatformNames.TRUE`   |
+| `platformType`     | Vendor CMS platform key                                           | `String`  | `null`  | `PtvTypes.PlatformTypes.CMS_ID` |
+| `previewMode`      | Whether to show overlays for in preview mode                      | `Boolean` | `false` |                                 |
+| `showOverlays`     | Whether to initially show overlays on load                        | `Boolean` | `false` |                                 |
+| `showPoster`       | Whether to show poster on load and when offline                   | `Boolean` | `false` |                                 |
+| `streamId`         | Identifier of the Promethean stream                               | `String`  | `null`  |                                 |
+| `viewerId`         | Identifier of the viewer                                          | `String`  | `null`  |                                 |
+| `viewerLatitude`   | Geographic latitude of the viewer                                 | `String`  | `null`  |                                 |
+| `viewerLongitude`  | Geographic longitude of the viewer                                | `String`  | `null`  |                                 |
 
 ## Static Types
 
-The plugin provides a few top-level static types to help construct the configuration options.
+The plugin provides a few top-level static types to help construct the configuration options. The types can be access on the window global `window.PtvTypes` or as a named import (e.g. `import { PtvTypes } from '@ptv.js/videojs-ptv'`).
 
-| Name            | Description                               | Usage                                                        |
-| --------------- | ----------------------------------------- | ------------------------------------------------------------ |
-| `ApiHosts`      | API hosts for testing                     | `videojsPtv.ApiHostType.<COMDEV\|QA\|STAGING\|PRODUCTION>`   |
-| `EmbedHosts`    | Embed hosts for testing                   | `videojsPtv.EmbedHostType.<COMDEV\|QA\|STAGING\|PRODUCTION>` |
-| `PlatformNames` | Platform names for integrated partner CMS | `videojsPtv.PlatformNames.<TRUE>`                            |
-| `PlatformTypes` | Platform types for integrated partner CMS | `videojsPtv.PlatformTypes.<CMS_ID>`                          |
+| Name            | Description                               | Usage                                                   |
+| --------------- | ----------------------------------------- | ------------------------------------------------------- |
+| `ApiHosts`      | API hosts for testing                     | `PtvTypes.ApiHosts.<COMDEV\|QA\|STAGING\|PRODUCTION>`   |
+| `EmbedHosts`    | Embed hosts for testing                   | `PtvTypes.EmbedHosts.<COMDEV\|QA\|STAGING\|PRODUCTION>` |
+| `PlatformNames` | Platform names for integrated partner CMS | `PtvTypes.PlatformNames.<TRUE>`                         |
+| `PlatformTypes` | Platform types for integrated partner CMS | `PtvTypes.PlatformTypes.<CMS_ID>`                       |
 
 ## High-level API
 

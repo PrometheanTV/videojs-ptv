@@ -4,10 +4,10 @@
  * @enum
  */
 export const ApiHosts = Object.freeze({
-  COMDEV: 'comdev.broadcast.promethean.tv',
-  QA: 'qa.broadcast.promethean.tv',
-  STAGING: 'staging.broadcast.promethean.tv',
-  PRODUCTION: 'broadcast.promethean.tv'
+  COMDEV: 'comdev',
+  QA: 'qa',
+  STAGING: 'staging',
+  PRODUCTION: 'prod'
 });
 
 /**
