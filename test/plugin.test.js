@@ -5,9 +5,12 @@ import sinon from 'sinon';
 import videojs from 'video.js';
 
 import plugin from '../src/plugin';
+import { ApiHosts, EmbedHosts } from '../src/constants';
 
 const config = {
   // Test channel and stream
+  apiHost: ApiHosts.PRODUCTION,
+  embedHost: EmbedHosts.COMDEV,
   channelId: '5c701be7dc3d20080e4092f4',
   streamId: '5de7e7c2a6adde5211684519',
   debug: true
@@ -62,7 +65,7 @@ QUnit.test('registers itself with video.js', function(assert) {
 QUnit.test('creates the embed', function(assert) {
   const done = assert.async();
 
-  assert.expect(6);
+  assert.expect(7);
 
   this.player.ptv(config);
 
@@ -71,11 +74,14 @@ QUnit.test('creates the embed', function(assert) {
 
     assert.ok(iframe, 'ptv-iframe created');
 
-    const domainRE = new RegExp('^https://embed.promethean.tv/??');
+    assert.ok(
+      iframe.src.startsWith(`https://${config.embedHost}/?`),
+      `loads from config.embedHost = ${config.embedHost}`
+    );
 
     assert.ok(
-      domainRE.test(iframe.src),
-      'loads from https://embed.promethean.tv'
+      reParam('apiHost', config.apiHost),
+      `uses config.apiHost = ${config.apiHost}`
     );
 
     assert.ok(
