@@ -16,6 +16,14 @@ const config = {
   debug: true
 };
 
+const configFailure = {
+  apiHost: config.apiHost,
+  embedHost: config.embedHost,
+  channelId: 'non-existent',
+  streamId: 'non-existent',
+  debug: config.debug
+};
+
 const reParam = (key, value) => new RegExp(`\\?.*&${key}=${value}(&|$)`);
 
 const Player = videojs.getComponent('Player');
@@ -214,4 +222,43 @@ QUnit.module('player events', function(hooks) {
     'time update notifies plugin',
     testFactory(PlayerEvents.TIME_UPDATE, 'timeUpdate')
   );
+});
+
+QUnit.module('plugin state', function(hooks) {
+  let ptv;
+
+  hooks.beforeEach(function(assert) {
+    this.fixture = document.getElementById('qunit-fixture');
+    this.video = document.createElement('video');
+    this.fixture.appendChild(this.video);
+    this.player = videojs(this.video);
+  });
+
+  hooks.afterEach(function(assert) {
+    this.player.dispose();
+  });
+
+  QUnit.test('config ready', function(assert) {
+    const done = assert.async();
+
+    ptv = this.player.ptv(config);
+
+    setTimeout(() => {
+      assert.equal(ptv.state.configReady, true, 'configReady = true');
+      assert.equal(ptv.state.configFailure, false, 'configFailure = false');
+      done();
+    }, 2000);
+  });
+
+  QUnit.test('config failure', function(assert) {
+    const done = assert.async();
+
+    ptv = this.player.ptv(configFailure);
+
+    setTimeout(() => {
+      assert.equal(ptv.state.configReady, false, 'configReady = false');
+      assert.equal(ptv.state.configFailure, true, 'configFailure = true');
+      done();
+    }, 2000);
+  });
 });
