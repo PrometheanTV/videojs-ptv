@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import videojs from 'video.js';
 
 import plugin from '../src/plugin';
-import { ApiHosts, EmbedHosts } from '../src/constants';
+import { ApiHosts, EmbedHosts, PlayerEvents } from '../src/constants';
 
 const config = {
   // Test channel and stream
@@ -159,5 +159,59 @@ QUnit.module('api', function(hooks) {
   QUnit.test(
     'ptv.timeUpdate() posts correct postMessage',
     testFactory('timeUpdate', 'payload')
+  );
+});
+
+QUnit.module('player events', function(hooks) {
+  let ptv;
+
+  hooks.beforeEach(function(assert) {
+    const done = assert.async();
+
+    this.fixture = document.getElementById('qunit-fixture');
+    this.video = document.createElement('video');
+    this.fixture.appendChild(this.video);
+    this.player = videojs(this.video);
+    ptv = this.player.ptv(config);
+
+    setTimeout(() => {
+      done();
+    });
+  });
+
+  hooks.afterEach(function(assert) {
+    this.player.dispose();
+  });
+
+  const testFactory = (event, apiMethod) =>
+    function(assert) {
+      const spy = sinon.spy(ptv, apiMethod);
+
+      this.player.trigger(event);
+      assert.ok(spy.calledOnce, 'api called');
+      this.player.trigger(event);
+      assert.ok(spy.calledTwice, 'api called twice');
+    };
+
+  QUnit.test('play starts plugin only once', function(assert) {
+    const spy = sinon.spy(ptv, 'start');
+
+    this.player.trigger(PlayerEvents.PLAY);
+    assert.ok(spy.calledOnce, 'api called');
+    this.player.trigger(PlayerEvents.PLAY);
+    assert.ok(spy.calledOnce, 'api called only once');
+  });
+
+  QUnit.test('play shows plugin', testFactory(PlayerEvents.PLAY, 'show'));
+
+  QUnit.test('ended stops plugin', testFactory(PlayerEvents.ENDED, 'stop'));
+
+  QUnit.test('error stops plugin', testFactory(PlayerEvents.ERROR, 'stop'));
+
+  QUnit.test('pause hides plugin', testFactory(PlayerEvents.PAUSE, 'hide'));
+
+  QUnit.test(
+    'time update notifies plugin',
+    testFactory(PlayerEvents.TIME_UPDATE, 'timeUpdate')
   );
 });
