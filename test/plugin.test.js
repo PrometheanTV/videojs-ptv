@@ -65,14 +65,16 @@ QUnit.test('registers itself with video.js', function(assert) {
 QUnit.test('creates the embed', function(assert) {
   const done = assert.async();
 
-  assert.expect(7);
+  assert.expect(8);
 
-  this.player.ptv(config);
+  const ptv = this.player.ptv(config);
 
   setTimeout(() => {
     const iframe = this.fixture.querySelector('iframe.ptv-iframe');
 
-    assert.ok(iframe, 'ptv-iframe created');
+    assert.strictEqual(iframe, ptv.embed.el_, "creates plugin's embed");
+
+    assert.ok(iframe, 'adds embed to DOM');
 
     assert.ok(
       iframe.src.startsWith(`https://${config.embedHost}/?`),
@@ -103,4 +105,59 @@ QUnit.test('creates the embed', function(assert) {
 
     done();
   });
+});
+
+QUnit.module('api', function(hooks) {
+  let ptv;
+  let spyPostMessage;
+
+  hooks.beforeEach(assert => {
+    const done = assert.async();
+
+    this.fixture = document.getElementById('qunit-fixture');
+    this.video = document.createElement('video');
+    this.fixture.appendChild(this.video);
+    this.player = videojs(this.video);
+    ptv = this.player.ptv(config);
+
+    setTimeout(() => {
+      spyPostMessage = sinon.spy(ptv.embed.el.contentWindow, 'postMessage');
+      done();
+    });
+  });
+
+  hooks.afterEach(assert => {
+    this.player.dispose();
+    spyPostMessage.restore();
+  });
+
+  const testFactory = (apiMethod, apiArgs) =>
+    function(assert) {
+      ptv[apiMethod](apiArgs);
+
+      assert.expect(apiArgs ? 4 : 3);
+      const [{ method, source, value }, origin] = spyPostMessage.lastCall.args;
+
+      assert.equal(origin, ptv.embed.origin, `origin is ${ptv.embed.origin}`);
+      assert.equal(method, apiMethod, `method is ${apiMethod}`);
+      assert.equal(source, '@ptv-host', 'source is @ptv-host');
+      if (apiArgs) {
+        assert.equal(value, apiArgs, 'args is payload');
+      }
+    };
+
+  QUnit.test('ptv.hide() posts correct postMessage', testFactory('hide'));
+
+  QUnit.test('ptv.load() posts correct postMessage', testFactory('load'));
+
+  QUnit.test('ptv.show() posts correct postMessage', testFactory('show'));
+
+  QUnit.test('ptv.start() posts correct postMessage', testFactory('start'));
+
+  QUnit.test('ptv.stop() posts correct postMessage', testFactory('stop'));
+
+  QUnit.test(
+    'ptv.timeUpdate() posts correct postMessage',
+    testFactory('timeUpdate', 'payload')
+  );
 });
