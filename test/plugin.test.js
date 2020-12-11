@@ -44,7 +44,7 @@ QUnit.module('videojs-ptv', {
   },
 
   afterEach() {
-    this.player.dispose();
+    this.player.ptv().dispose();
   }
 });
 
@@ -59,7 +59,7 @@ QUnit.test('registers itself with video.js', function(assert) {
     'videojs-ptv plugin was registered'
   );
 
-  this.player.ptv();
+  this.player.ptv(config);
 
   setTimeout(() => {
     assert.ok(
@@ -135,7 +135,7 @@ QUnit.module('api', function(hooks) {
   });
 
   hooks.afterEach(assert => {
-    this.player.dispose();
+    ptv.dispose();
     spyPostMessage.restore();
   });
 
@@ -188,7 +188,7 @@ QUnit.module('player events', function(hooks) {
   });
 
   hooks.afterEach(function(assert) {
-    this.player.dispose();
+    ptv.dispose();
   });
 
   const testFactory = (event, apiMethod) =>
@@ -235,7 +235,7 @@ QUnit.module('plugin state', function(hooks) {
   });
 
   hooks.afterEach(function(assert) {
-    this.player.dispose();
+    ptv.dispose();
   });
 
   QUnit.test('config ready', function(assert) {

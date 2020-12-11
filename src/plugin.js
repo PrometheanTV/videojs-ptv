@@ -174,6 +174,14 @@ class Ptv extends Plugin {
     ]);
   }
 
+  dispose() {
+    this.removePlayerListeners_();
+    if (this.embed) {
+      this.embed.dispose();
+    }
+    super.dispose();
+  }
+
   // //////////////////////////
   // Public API
   //
