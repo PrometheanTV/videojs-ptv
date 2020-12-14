@@ -67,7 +67,7 @@ QUnit.test('registers itself with video.js', function(assert) {
       'the plugin adds a class to the player'
     );
     done();
-  });
+  }, 1);
 });
 
 QUnit.test('creates the embed', function(assert) {
@@ -112,7 +112,7 @@ QUnit.test('creates the embed', function(assert) {
     assert.ok(reParam('iframe', true).test(iframe.src), 'uses iframe = true');
 
     done();
-  });
+  }, 1);
 });
 
 QUnit.module('api', function(hooks) {
@@ -131,7 +131,7 @@ QUnit.module('api', function(hooks) {
     setTimeout(() => {
       spyPostMessage = sinon.spy(ptv.embed.el.contentWindow, 'postMessage');
       done();
-    });
+    }, 1);
   });
 
   hooks.afterEach(assert => {
@@ -184,7 +184,7 @@ QUnit.module('player events', function(hooks) {
 
     setTimeout(() => {
       done();
-    });
+    }, 1);
   });
 
   hooks.afterEach(function(assert) {
