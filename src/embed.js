@@ -65,9 +65,15 @@ class PtvEmbed {
     this.callbacks_ = videojs.mergeOptions(defaultCallbacks, callbacks);
 
     // Setup post message interface.
-    window.addEventListener('message', this.handleMessage_.bind(this));
+    this.handleMessage_ = this.handleMessage_.bind(this);
+    window.addEventListener('message', this.handleMessage_);
 
     return this;
+  }
+
+  dispose() {
+    window.removeEventListener('message', this.handleMessage_);
+    this.callbacks_ = defaultCallbacks;
   }
 
   /**
