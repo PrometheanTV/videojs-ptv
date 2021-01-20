@@ -20,7 +20,7 @@
     "clean": "shx rm -rf ./dist ./test/dist",
     "postclean": "shx mkdir -p ./dist ./test/dist",
     "docs": "npm-run-all docs:*",
-    "docs:api": "jsdoc src -g plugins/markdown -r -d docs/api",
+    "docs:api": "jsdoc src -c jsdoc.conf.json -r -d docs/api",
     "docs:toc": "doctoc --notitle README.md",
     "lint": "vjsstandard",
     "server": "karma start scripts/karma.conf.js --singleRun=false --auto-watch",
@@ -83,7 +83,7 @@
   },
   "devDependencies": {
     "@videojs/generator-helpers": "^2.0.2",
-    "jsdoc": "BrandonOCasey/jsdoc#feat/plugin-from-cli",
+    "jsdoc": "^3.6.6",
     "karma": "^5.2.3",
     "postcss-cli": "^8.3.0",
     "rollup": "^2.35.1",
