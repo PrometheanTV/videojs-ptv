@@ -174,6 +174,9 @@ class Ptv extends Plugin {
     ]);
   }
 
+  /**
+   * Dispose the plugin
+   */
   dispose() {
     this.removePlayerListeners_();
     if (this.embed) {
