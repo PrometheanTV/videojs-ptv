@@ -71,6 +71,9 @@ class PtvEmbed {
     return this;
   }
 
+  /**
+   * Dispose the embed
+   */
   dispose() {
     window.removeEventListener('message', this.handleMessage_);
     this.callbacks_ = defaultCallbacks;
