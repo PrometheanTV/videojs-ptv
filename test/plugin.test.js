@@ -247,7 +247,7 @@ QUnit.module('plugin state', function(hooks) {
       assert.equal(ptv.state.configReady, true, 'configReady = true');
       assert.equal(ptv.state.configFailure, false, 'configFailure = false');
       done();
-    }, 500);
+    }, 3000);
   });
 
   QUnit.test('config failure', function(assert) {
@@ -259,6 +259,6 @@ QUnit.module('plugin state', function(hooks) {
       assert.equal(ptv.state.configReady, false, 'configReady = false');
       assert.equal(ptv.state.configFailure, true, 'configFailure = true');
       done();
-    }, 500);
+    }, 3000);
   });
 });
