@@ -276,7 +276,6 @@ class PtvEmbed {
    * @todo This should be comprehensive to avoid any negative side-effects.
    */
   onLoad_() {
-    console.log('onload');
     this.loaded = true;
     try {
       if (this.el.contentDocument.body.innerText === 'NOT FOUND') {
