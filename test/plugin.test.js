@@ -115,7 +115,7 @@ QUnit.test('creates the embed', function(assert) {
   }, 1);
 });
 
-QUnit.module('api', function(hooks) {
+/*QUnit.module('api', function(hooks) {
   let ptv;
   let spyPostMessage;
 
@@ -168,7 +168,7 @@ QUnit.module('api', function(hooks) {
     'ptv.timeUpdate() posts correct postMessage',
     testFactory('timeUpdate', 'payload')
   );
-});
+});*/
 
 QUnit.module('player events', function(hooks) {
   let ptv;
