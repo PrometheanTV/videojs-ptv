@@ -33,6 +33,13 @@ class PtvEmbed {
    * @return {PtvEmbed} Instance of PtvEmbed
    */
   constructor(options, callbacks) {
+    this.loaded = undefined;
+    this.preloadState = {
+      started: undefined,
+      visible: undefined,
+      time: -1
+    }
+
     const config = videojs.mergeOptions(options, requiredOptions);
     const origin = PROTOCOL + options.embedHost;
 
@@ -112,13 +119,19 @@ class PtvEmbed {
   destroy() {
     this.el.parentNode.removeChild(this.el);
     this.el_ = null;
+    this.loaded = false;
   }
 
   /**
    * Hide overlays.
    */
   hide() {
-    this.callMethod_('hide');
+    if(this.loaded) {
+      this.callMethod_('hide');
+    } else {
+      this.preloadState.visible = false;
+    }
+
   }
 
   /**
@@ -170,21 +183,35 @@ class PtvEmbed {
    * Show overlays.
    */
   show() {
-    this.callMethod_('show');
+    if(this.loaded) {
+      this.callMethod_('show');
+    } else {
+      this.preloadState.visible = true;
+    }
   }
 
   /**
    * Start and show overlays.
    */
   start() {
-    this.callMethod_('start');
+    if(this.loaded) {
+      this.callMethod_('start');
+    } else {
+      this.preloadState.started = true;
+    }
+
   }
 
   /**
    * Stop and hide overlays.
    */
   stop() {
-    this.callMethod_('stop');
+    if(this.loaded) {
+      this.callMethod_('stop');
+    } else {
+      this.preloadState.started = false;
+    }
+
   }
 
   /**
@@ -193,7 +220,12 @@ class PtvEmbed {
    * @param {number} seconds Player playhead in seconds.
    */
   timeUpdate(seconds) {
-    this.callMethod_('timeUpdate', seconds);
+    if(this.loaded) {
+      this.callMethod_('timeUpdate', seconds);
+    } else {
+      this.preloadState.time = seconds;
+    }
+
   }
 
   /**
@@ -214,7 +246,7 @@ class PtvEmbed {
    * @param {Object} message Message sent from iframe postMessage.
    */
   handleMessage_(message) {
-    const { data, origin } = message;
+    const { data, origin = '' } = message;
 
     if (origin === this.origin) {
       const payload = parseMessageData(data);
@@ -244,6 +276,8 @@ class PtvEmbed {
    * @todo This should be comprehensive to avoid any negative side-effects.
    */
   onLoad_() {
+    console.log('onload');
+    this.loaded = true;
     try {
       if (this.el.contentDocument.body.innerText === 'NOT FOUND') {
         this.destroy();
@@ -251,6 +285,15 @@ class PtvEmbed {
     } catch (e) {
       // Could log this error, if needed.
     }
+    if (this.loaded) this.applyPreloadState()
+  }
+
+  applyPreloadState() {
+    if(this.preloadState.started) this.start();
+    else if(this.preloadState.started === false) this.stop();
+    if(this.preloadState.visible) this.show()
+    else if(this.preloadState.visible === false) this.hide();
+    if(this.preloadState.time > -1) this.timeUpdate(this.preloadState.time);
   }
 }
 
