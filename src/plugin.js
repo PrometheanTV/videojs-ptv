@@ -63,8 +63,8 @@ class Ptv extends Plugin {
     // An object that stores any state that gets changed before `this.embed` is
     // ready
     this.preloadState = {
-      playing: undefined,
-      showing: undefined,
+      started: undefined,
+      visible: undefined,
       time: -1,
     }
 
@@ -91,14 +91,14 @@ class Ptv extends Plugin {
 
     // Create iframe instance.
     this.embed = new PtvEmbed(this.options, callbacks);
-    if(this.preloadState.playing) {
+    if (this.preloadState.started) {
       this.embed.start();
-    } else if(this.preloadState.playing === false) {
+    } else if(this.preloadState.started === false) {
       this.embed.stop();
     }
-    if(this.preloadState.showing) {
+    if (this.preloadState.visible) {
       this.embed.show();
-    } else if(this.preloadState.showing === false) {
+    } else if (this.preloadState.visible === false) {
       this.embed.hide();
     }
     if(this.preloadState.time !== -1) {
@@ -151,7 +151,7 @@ class Ptv extends Plugin {
       this.player.poster(poster.loading);
     }
 
-    // Use video from API, if no video playing.
+    // Use video from API, if no video started.
     if (!this.player.src() && this.player.canPlayType(type)) {
       this.player.src(src);
     }
@@ -218,7 +218,7 @@ class Ptv extends Plugin {
     if (this.embed) {
       this.embed.hide();
     } else {
-      this.preloadState.showing = false;
+      this.preloadState.visible = false;
     }
   }
 
@@ -242,7 +242,7 @@ class Ptv extends Plugin {
     if (this.embed) {
       this.embed.show();
     } else {
-      this.preloadState.showing = true;
+      this.preloadState.visible = true;
     }
   }
 
@@ -253,7 +253,7 @@ class Ptv extends Plugin {
     if (this.embed) {
       this.embed.start();
     } else {
-      this.preloadState.playing = true;
+      this.preloadState.started = true;
     }
   }
 
@@ -263,7 +263,7 @@ class Ptv extends Plugin {
   stop() {
     if (this.embed) {
       this.embed.stop();
-      this.preloadState.playing = false;
+      this.preloadState.started = false;
     }
   }
 
