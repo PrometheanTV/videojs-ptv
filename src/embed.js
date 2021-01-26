@@ -33,8 +33,11 @@ class PtvEmbed {
    * @return {PtvEmbed} Instance of PtvEmbed
    */
   constructor(options, callbacks) {
-    this.loaded = undefined;
+    // flag that tells us if we have received SDK_READY message
+    this.ready = false;
+
     this.preloadState = {
+      config: undefined,
       started: undefined,
       visible: undefined,
       time: -1
@@ -74,8 +77,6 @@ class PtvEmbed {
     // Setup post message interface.
     this.handleMessage_ = this.handleMessage_.bind(this);
     window.addEventListener('message', this.handleMessage_);
-
-    return this;
   }
 
   /**
@@ -119,14 +120,14 @@ class PtvEmbed {
   destroy() {
     this.el.parentNode.removeChild(this.el);
     this.el_ = null;
-    this.loaded = false;
+    this.ready = false;
   }
 
   /**
    * Hide overlays.
    */
   hide() {
-    if(this.loaded) {
+    if(this.ready) {
       this.callMethod_('hide');
     } else {
       this.preloadState.visible = false;
@@ -140,7 +141,12 @@ class PtvEmbed {
    * @param {Object} config Config object passed to ptv.js
    */
   load(config) {
-    this.callMethod_('load', config);
+    if (this.ready) {
+      this.callMethod_('load', config);
+    } else {
+      this.preloadState.config = config;
+    }
+
   }
 
   /**
@@ -183,7 +189,7 @@ class PtvEmbed {
    * Show overlays.
    */
   show() {
-    if(this.loaded) {
+    if(this.ready) {
       this.callMethod_('show');
     } else {
       this.preloadState.visible = true;
@@ -194,7 +200,7 @@ class PtvEmbed {
    * Start and show overlays.
    */
   start() {
-    if(this.loaded) {
+    if(this.ready) {
       this.callMethod_('start');
     } else {
       this.preloadState.started = true;
@@ -206,7 +212,7 @@ class PtvEmbed {
    * Stop and hide overlays.
    */
   stop() {
-    if(this.loaded) {
+    if(this.ready) {
       this.callMethod_('stop');
     } else {
       this.preloadState.started = false;
@@ -220,7 +226,7 @@ class PtvEmbed {
    * @param {number} seconds Player playhead in seconds.
    */
   timeUpdate(seconds) {
-    if(this.loaded) {
+    if(this.ready) {
       this.callMethod_('timeUpdate', seconds);
     } else {
       this.preloadState.time = seconds;
@@ -246,9 +252,8 @@ class PtvEmbed {
    * @param {Object} message Message sent from iframe postMessage.
    */
   handleMessage_(message) {
-    const { data, origin = '' } = message;
-
-    if (origin === this.origin) {
+    const { data, origin } = message;
+    if (origin === this.origin_) {
       const payload = parseMessageData(data);
 
       switch (payload.type) {
@@ -276,7 +281,7 @@ class PtvEmbed {
    * @todo This should be comprehensive to avoid any negative side-effects.
    */
   onLoad_() {
-    this.loaded = true;
+    this.ready = true;
     try {
       if (this.el.contentDocument.body.innerText === 'NOT FOUND') {
         this.destroy();
@@ -284,15 +289,17 @@ class PtvEmbed {
     } catch (e) {
       // Could log this error, if needed.
     }
-    if (this.loaded) this.applyPreloadState()
+    if (this.ready) this.applyPreloadState()
   }
 
   applyPreloadState() {
-    if(this.preloadState.started) this.start();
-    else if(this.preloadState.started === false) this.stop();
-    if(this.preloadState.visible) this.show()
-    else if(this.preloadState.visible === false) this.hide();
-    if(this.preloadState.time > -1) this.timeUpdate(this.preloadState.time);
+    if (this.preloadState.config) this.load(this.preloadState.config);
+    if (this.preloadState.started) this.start();
+    else if (this.preloadState.started === false) this.stop();
+    if (this.preloadState.visible) this.show()
+    else if (this.preloadState.visible === false) this.hide();
+    if (this.preloadState.time > -1) this.timeUpdate(this.preloadState.time);
+    this.preloadState = {};
   }
 }
 
