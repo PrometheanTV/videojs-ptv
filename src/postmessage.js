@@ -54,6 +54,7 @@ export function postMessage(iframe, method, params) {
   if (ieVersion >= 8 && ieVersion < 10) {
     message = JSON.stringify(message);
   }
-
-  iframe.el.contentWindow.postMessage(message, iframe.origin);
+  // `Window.origin` may not be available so fall back to
+  const origin = iframe.el.contentWindow.origin || iframe.origin;
+  iframe.el.contentWindow.postMessage(message, origin);
 }
