@@ -19,6 +19,13 @@ const requiredOptions = {
   iframe: true
 };
 
+const createDefaultPreloadState = () => ({
+  config: undefined,
+  started: undefined,
+  visible: undefined,
+  time: -1
+});
+
 /**
  * Class that wraps the iframe element that loads the PTV canvas page and
  * exposes the SDK API to the videojs plugin.
@@ -29,18 +36,14 @@ class PtvEmbed {
    *
    * @param {Object} options Embed options to be serialized.
    * @param {Object} callbacks Map of callback events to execute on message
+   * @param {string} iframeContent The optional content for the iframe (useful for tests)
    *  received.
    */
   constructor(options, callbacks) {
     // flag that tells us if we have received SDK_READY message
     this.ready = false;
 
-    this.preloadState = {
-      config: undefined,
-      started: undefined,
-      visible: undefined,
-      time: -1
-    };
+    this.preloadState = createDefaultPreloadState();
 
     const config = videojs.mergeOptions(options, requiredOptions);
     const origin = PROTOCOL + options.embedHost;
@@ -49,8 +52,19 @@ class PtvEmbed {
     const el = window.document.createElement('iframe');
 
     el.className = 'ptv-iframe';
-    el.setAttribute('src', origin + '?' + serialize(config));
 
+    // eslint-disable-next-line no-warning-comments
+    // TODO this is a hack for testing.
+    //  If we assign some raw markup to `options.embedHost` then we
+    //  set the iframe.srcdoc with that markup and set `origin_` to
+    //  match the test runner host assumed to be 'http://localhost:9999'
+    if (options.embedHost.startsWith('<!DOCTYPE html>')) {
+      el.setAttribute('srcdoc', options.embedHost);
+      this.origin_ = 'http://localhost:9999';
+    } else {
+      el.setAttribute('src', origin + '?' + serialize(config));
+      this.origin_ = origin;
+    }
     // Set iFrame CSS styles.
     el.style.cssText = `
       position: absolute;
@@ -66,9 +80,6 @@ class PtvEmbed {
     // Store element to instance.
     this.el_ = el;
     this.el_.onload = this.onLoad_.bind(this);
-
-    // Setup origin path for post messaging.
-    this.origin_ = origin;
 
     // Store callbacks from plugin.
     this.callbacks_ = videojs.mergeOptions(defaultCallbacks, callbacks);
@@ -317,7 +328,7 @@ class PtvEmbed {
     if (this.preloadState.time > -1) {
       this.timeUpdate(this.preloadState.time);
     }
-    this.preloadState = {};
+    this.preloadState = createDefaultPreloadState();
   }
 }
 

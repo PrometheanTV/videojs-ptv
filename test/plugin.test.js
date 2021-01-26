@@ -4,45 +4,29 @@ import sinon from 'sinon';
 import videojs from 'video.js';
 import plugin from '../src/plugin';
 import { ApiHosts, PlayerEvents, SdkEvents } from '../src/constants';
-
-/**
- * A mock iframe data url to pass to plugin so that we isolate tests to this library
- * and ensure that tests don't fail due to environmental issues
- * @type {string}
- */
-const mockIframeContent = encodeURI(`
-<!DOCTYPE html>
-<html>
-<head>
-<script>
-console.log('setting up mock iframe');
-window.addEventListener('message',(msg) => console.log('mock iframe message', msg));
-</script>
-</head>
-<body>
-<script>
-if(window.parent) {
-  window.parent.postMessage(JSON.stringify({type:${SdkEvents.CONFIG_READY}), '*')
-}
-</script>
-</body>
-</html>
-`);
+import { iframeMarkup } from './mocks';
 
 const config = {
   // Test channel and stream
   apiHost: ApiHosts.PRODUCTION,
-  embedHost: `data:text/html;charset=utf-8,${mockIframeContent}`,
+  embedHost: iframeMarkup,
   channelId: '5c701be7dc3d20080e4092f4',
   streamId: '5de7e7c2a6adde5211684519',
   debug: true
 };
+
+const configWithDataUrl = Object.assign(
+  {},
+  config,
+  { embedHost: 'data:text/html;charset=utf-8,' + encodeURIComponent(iframeMarkup) }
+);
 
 /**
  * The mock local origin that the mock iframe content will load from.
  * @type {string}
  */
 const mockOrigin = 'https://' + config.embedHost;
+//const mockOrigin = 'http://localhost:9999';// + config.embedHost;
 
 const reParam = (key, value) => new RegExp(`\\?.*&${key}=${value}(&|$)`);
 
@@ -61,7 +45,7 @@ const setupPlugin = function() {
     this.video = document.createElement('video');
     this.fixture.appendChild(this.video);
     this.player = videojs(this.video);
-    this.ptv = this.player.ptv(config);
+    this.ptv = this.player.ptv(configWithDataUrl);
     this.player.ready(() => {
       return resolve();
     });
@@ -70,7 +54,7 @@ const setupPlugin = function() {
 
 const teardownPlugin = function() {
   return new Promise((resolve, _) => {
-    this.player.ptv().dispose();
+    this.ptv.dispose();
     setTimeout(() => resolve(), 1);
   });
 };
@@ -98,9 +82,14 @@ QUnit.module('videojs-ptv', function(hooks) {
     assert.strictEqual(iframe, this.ptv.embed.el_, 'creates plugin\'s embed');
 
     assert.ok(iframe, 'adds embed to DOM');
+  });
+
+  QUnit.test('applies configuration to iframe URL params', function(assert) {
+    const iframe = this.fixture.querySelector('iframe.ptv-iframe');
+    console.log(configWithDataUrl);
     assert.ok(
-      iframe.src.startsWith(`https://${config.embedHost}`),
-      `loads from config.embedHost = ${config.embedHost}`
+      iframe.src.startsWith(`https://${configWithDataUrl.embedHost}`),
+      `loads from config.embedHost = ${configWithDataUrl.embedHost}`
     );
 
     assert.ok(
@@ -124,7 +113,6 @@ QUnit.module('videojs-ptv', function(hooks) {
     );
 
     assert.ok(reParam('iframe', true).test(iframe.src), 'uses iframe = true');
-
   });
 });
 
@@ -219,6 +207,7 @@ QUnit.module('player events', function(hooks) {
 });
 
 QUnit.module('plugin state', function(hooks) {
+  const origin = 'https://' + configWithDataUrl.embedHost;
   // The message that we would expect to receive from iframe SDK when it has
   // loaded the config
   const mockConfigReadyMessage = {
@@ -230,7 +219,7 @@ QUnit.module('plugin state', function(hooks) {
         type: ''
       }
     }),
-    origin: mockOrigin
+    origin
   };
   // The message that we would expect to receive from iframe SDK when it has
   // failed to the load the config
@@ -238,7 +227,7 @@ QUnit.module('plugin state', function(hooks) {
     data: JSON.stringify({
       type: SdkEvents.CONFIG_FAILURE
     }),
-    origin: mockOrigin
+    origin
   };
 
   hooks.beforeEach(setupPlugin);
