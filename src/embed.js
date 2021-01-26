@@ -30,7 +30,6 @@ class PtvEmbed {
    * @param {Object} options Embed options to be serialized.
    * @param {Object} callbacks Map of callback events to execute on message
    *  received.
-   * @return {PtvEmbed} Instance of PtvEmbed
    */
   constructor(options, callbacks) {
     // flag that tells us if we have received SDK_READY message
@@ -293,7 +292,12 @@ class PtvEmbed {
     }
   }
 
-  applyPreloadState() {
+  /**
+   * Applies any state changes that occurred before the SDK was ready
+   *
+   * @private
+   */
+  applyPreloadState_() {
     if (!this.ready) {
       return;
     }

@@ -1,4 +1,5 @@
 import document from 'global/document';
+import QUnit from 'qunit';
 import videojs from 'video.js';
 import sinon from 'sinon';
 import { ApiHosts, EmbedHosts } from '../src/constants';
@@ -17,14 +18,12 @@ QUnit.module.skip('api', function(hooks) {
   let spyPostMessage;
 
   hooks.beforeEach(function() {
-    const self = this;
-
     return new Promise((resolve, _) => {
-      self.fixture = document.getElementById('qunit-fixture');
-      self.video = document.createElement('video');
-      self.fixture.appendChild(self.video);
-      self.player = videojs(self.video);
-      ptv = self.player.ptv(config);
+      this.fixture = document.getElementById('qunit-fixture');
+      this.video = document.createElement('video');
+      this.fixture.appendChild(this.video);
+      this.player = videojs(this.video);
+      ptv = this.player.ptv(config);
       const waitForEmbedReady = () => setTimeout(() => {
         if (ptv.embed && ptv.embed.ready) {
           // This test may not be good enough due to postMessage origin.
@@ -52,7 +51,7 @@ QUnit.module.skip('api', function(hooks) {
       // assert.expect(apiArgs ? 4 : 3);
       const [{ method, source, value }, origin] = spyPostMessage.lastCall.args;
 
-      // assert.equal(origin, ptv.embed.origin, `origin is ${ptv.embed.origin}`);
+      assert.equal(origin, ptv.embed.origin, `origin is ${ptv.embed.origin}`);
       assert.equal(method, apiMethod, `method is ${apiMethod}`);
       assert.equal(source, '@ptv-host', 'source is @ptv-host');
       if (apiArgs) {

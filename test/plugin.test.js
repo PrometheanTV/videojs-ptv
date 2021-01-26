@@ -56,15 +56,13 @@ QUnit.test('the environment is sane', function(assert) {
 });
 
 const setupPlugin = function() {
-  const self = this;
-
   return new Promise((resolve, _) => {
-    self.fixture = document.getElementById('qunit-fixture');
-    self.video = document.createElement('video');
-    self.fixture.appendChild(self.video);
-    self.player = videojs(self.video);
-    self.ptv = self.player.ptv(config);
-    self.player.ready(() => {
+    this.fixture = document.getElementById('qunit-fixture');
+    this.video = document.createElement('video');
+    this.fixture.appendChild(this.video);
+    this.player = videojs(this.video);
+    this.ptv = this.player.ptv(config);
+    this.player.ready(() => {
       return resolve();
     });
   });
