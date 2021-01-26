@@ -41,7 +41,7 @@ class PtvEmbed {
       started: undefined,
       visible: undefined,
       time: -1
-    }
+    };
 
     const config = videojs.mergeOptions(options, requiredOptions);
     const origin = PROTOCOL + options.embedHost;
@@ -127,7 +127,7 @@ class PtvEmbed {
    * Hide overlays.
    */
   hide() {
-    if(this.ready) {
+    if (this.ready) {
       this.callMethod_('hide');
     } else {
       this.preloadState.visible = false;
@@ -189,7 +189,7 @@ class PtvEmbed {
    * Show overlays.
    */
   show() {
-    if(this.ready) {
+    if (this.ready) {
       this.callMethod_('show');
     } else {
       this.preloadState.visible = true;
@@ -200,7 +200,7 @@ class PtvEmbed {
    * Start and show overlays.
    */
   start() {
-    if(this.ready) {
+    if (this.ready) {
       this.callMethod_('start');
     } else {
       this.preloadState.started = true;
@@ -212,7 +212,7 @@ class PtvEmbed {
    * Stop and hide overlays.
    */
   stop() {
-    if(this.ready) {
+    if (this.ready) {
       this.callMethod_('stop');
     } else {
       this.preloadState.started = false;
@@ -226,7 +226,7 @@ class PtvEmbed {
    * @param {number} seconds Player playhead in seconds.
    */
   timeUpdate(seconds) {
-    if(this.ready) {
+    if (this.ready) {
       this.callMethod_('timeUpdate', seconds);
     } else {
       this.preloadState.time = seconds;
@@ -253,6 +253,7 @@ class PtvEmbed {
    */
   handleMessage_(message) {
     const { data, origin } = message;
+
     if (origin === this.origin_) {
       const payload = parseMessageData(data);
 
@@ -263,7 +264,7 @@ class PtvEmbed {
 
       case SdkEvents.CONFIG_READY:
         this.ready = true;
-        this.applyPreloadState()
+        this.applyPreloadState();
         this.callbacks.onConfigReady(payload.data);
         break;
 
@@ -293,13 +294,25 @@ class PtvEmbed {
   }
 
   applyPreloadState() {
-    if (!this.ready) return;
-    if (this.preloadState.config) this.load(this.preloadState.config);
-    if (this.preloadState.started) this.start();
-    else if (this.preloadState.started === false) this.stop();
-    if (this.preloadState.visible) this.show()
-    else if (this.preloadState.visible === false) this.hide();
-    if (this.preloadState.time > -1) this.timeUpdate(this.preloadState.time);
+    if (!this.ready) {
+      return;
+    }
+    if (this.preloadState.config) {
+      this.load(this.preloadState.config);
+    }
+    if (this.preloadState.started) {
+      this.start();
+    } else if (this.preloadState.started === false) {
+      this.stop();
+    }
+    if (this.preloadState.visible) {
+      this.show();
+    } else if (this.preloadState.visible === false) {
+      this.hide();
+    }
+    if (this.preloadState.time > -1) {
+      this.timeUpdate(this.preloadState.time);
+    }
     this.preloadState = {};
   }
 }

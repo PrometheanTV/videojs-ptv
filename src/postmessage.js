@@ -56,5 +56,6 @@ export function postMessage(iframe, method, params) {
   }
   // `Window.origin` may not be available so fall back to
   const origin = iframe.el.contentWindow.origin || iframe.origin;
+
   iframe.el.contentWindow.postMessage(message, origin);
 }

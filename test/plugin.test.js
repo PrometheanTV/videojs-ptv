@@ -42,7 +42,7 @@ const config = {
  * The mock local origin that the mock iframe content will load from.
  * @type {string}
  */
-const mockOrigin = 'https://'+config.embedHost;
+const mockOrigin = 'https://' + config.embedHost;
 
 const reParam = (key, value) => new RegExp(`\\?.*&${key}=${value}(&|$)`);
 
@@ -57,6 +57,7 @@ QUnit.test('the environment is sane', function(assert) {
 
 const setupPlugin = function() {
   const self = this;
+
   return new Promise((resolve, _) => {
     self.fixture = document.getElementById('qunit-fixture');
     self.video = document.createElement('video');
@@ -64,7 +65,7 @@ const setupPlugin = function() {
     self.player = videojs(self.video);
     self.ptv = self.player.ptv(config);
     self.player.ready(() => {
-      return resolve()
+      return resolve();
     });
   });
 };
@@ -73,15 +74,15 @@ const teardownPlugin = function() {
   return new Promise((resolve, _) => {
     this.player.ptv().dispose();
     setTimeout(() => resolve(), 1);
-  })
-}
+  });
+};
 
 QUnit.module('videojs-ptv', function(hooks) {
   hooks.beforeEach(setupPlugin);
   hooks.afterEach(teardownPlugin);
 
   QUnit.test('registers itself with video.js', function(assert) {
-    //console.log('this', this);
+    // console.log('this', this);
     assert.strictEqual(
       typeof Player.prototype.ptv,
       'function',
@@ -95,6 +96,7 @@ QUnit.module('videojs-ptv', function(hooks) {
 
   QUnit.test('creates the embed', function(assert) {
     const iframe = this.fixture.querySelector('iframe.ptv-iframe');
+
     assert.strictEqual(iframe, this.ptv.embed.el_, 'creates plugin\'s embed');
 
     assert.ok(iframe, 'adds embed to DOM');
@@ -174,7 +176,7 @@ QUnit.module('preload state', function(hooks) {
 
   QUnit.test(
     'ptv.timeUpdate() call is added to state if SDK is not ready',
-    function (assert) {
+    function(assert) {
       this.ptv.timeUpdate(5);
       assert.equal(this.ptv.embed.preloadState.time, 5);
     }
@@ -188,6 +190,7 @@ QUnit.module('player events', function(hooks) {
   const testFactory = (event, apiMethod) =>
     function(assert) {
       const spy = sinon.spy(this.ptv, apiMethod);
+
       this.player.trigger(event);
       assert.ok(spy.calledOnce, 'api called');
       this.player.trigger(event);
@@ -220,7 +223,7 @@ QUnit.module('player events', function(hooks) {
 QUnit.module('plugin state', function(hooks) {
   // The message that we would expect to receive from iframe SDK when it has
   // loaded the config
-  let mockConfigReadyMessage = {
+  const mockConfigReadyMessage = {
     data: JSON.stringify({
       type: SdkEvents.CONFIG_READY,
       data: {
@@ -233,7 +236,7 @@ QUnit.module('plugin state', function(hooks) {
   };
   // The message that we would expect to receive from iframe SDK when it has
   // failed to the load the config
-  let mockConfigFailMessage = {
+  const mockConfigFailMessage = {
     data: JSON.stringify({
       type: SdkEvents.CONFIG_FAILURE
     }),
