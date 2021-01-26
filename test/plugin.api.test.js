@@ -2,14 +2,13 @@ import document from 'global/document';
 import QUnit from 'qunit';
 import videojs from 'video.js';
 import sinon from 'sinon';
-import { ApiHosts, EmbedHosts, SdkEvents } from '../src/constants';
+import { ApiHosts } from '../src/constants';
 import {iframeMarkup} from './mocks';
 
 const config = {
   // Test channel and stream
   apiHost: ApiHosts.PRODUCTION,
   embedHost: iframeMarkup,
-  //embedHost: EmbedHosts.COMDEV,
   channelId: '5c701be7dc3d20080e4092f4',
   streamId: '5de7e7c2a6adde5211684519',
   debug: true
