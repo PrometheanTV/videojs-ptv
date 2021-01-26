@@ -61,5 +61,6 @@ export const PlayerEvents = Object.freeze({
 export const SdkEvents = Object.freeze({
   CLICK_MISS: 'ptv.click.miss',
   CONFIG_FAILURE: 'ptv.config.failure',
-  CONFIG_READY: 'ptv.config.ready'
+  CONFIG_READY: 'ptv.config.ready',
+  SDK_READY: 'ptv.sdk.ready'
 });
