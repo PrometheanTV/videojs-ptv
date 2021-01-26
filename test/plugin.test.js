@@ -10,13 +10,24 @@ import { ApiHosts, EmbedHosts, PlayerEvents, SdkEvents } from '../src/constants'
  * and ensure that tests don't fail due to environmental issues
  * @type {string}
  */
-const mockIframeContent = encodeURI(`<html></html>`);
-/**
- * The mock local origin that the mock iframe content will load from.
- * It is basically the URL of the test runner.
- * @type {string}
- */
-const mockOrigin = 'http://localhost:9999';
+const mockIframeContent = encodeURI(`
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+console.log('setting up mock iframe');
+window.addEventListener('message',(msg) => console.log('mock iframe message', msg));
+</script>
+</head>
+<body>
+<script>
+if(window.parent) {
+  window.parent.postMessage(JSON.stringify({type:'ptv.sdk.ready'}), '*')
+}
+</script>
+</body>
+</html>
+`);
 
 const config = {
   // Test channel and stream
@@ -26,6 +37,13 @@ const config = {
   streamId: '5de7e7c2a6adde5211684519',
   debug: true
 };
+
+/**
+ * The mock local origin that the mock iframe content will load from.
+ * It is basically the URL of the test runner.
+ * @type {string}
+ */
+const mockOrigin = 'https://'+config.embedHost;
 
 const reParam = (key, value) => new RegExp(`\\?.*&${key}=${value}(&|$)`);
 
@@ -111,14 +129,12 @@ QUnit.module('videojs-ptv', function(hooks) {
   });
 });
 
-
-
-QUnit.module('api', function(hooks) {
+QUnit.module('preload state', function(hooks) {
   hooks.beforeEach(setupPlugin);
   hooks.afterEach(teardownPlugin);
 
   QUnit.test(
-    'ptv.hide() posts correct postMessage',
+    'ptv.hide()',
     function(assert) {
       this.ptv.hide();
       assert.equal(this.ptv.embed.preloadState.visible, false);
@@ -126,7 +142,7 @@ QUnit.module('api', function(hooks) {
   );
 
   QUnit.test(
-    'ptv.load() posts correct postMessage',
+    'ptv.load() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.load('url');
       assert.equal(this.ptv.embed.preloadState.config, 'url');
@@ -134,7 +150,7 @@ QUnit.module('api', function(hooks) {
   );
 
   QUnit.test(
-    'ptv.show() posts correct postMessage',
+    'ptv.show() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.show();
       assert.equal(this.ptv.embed.preloadState.visible, true);
@@ -142,7 +158,7 @@ QUnit.module('api', function(hooks) {
   );
 
   QUnit.test(
-    'ptv.start() posts correct postMessage',
+    'ptv.start() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.start();
       assert.equal(this.ptv.embed.preloadState.started, true);
@@ -150,7 +166,7 @@ QUnit.module('api', function(hooks) {
   );
 
   QUnit.test(
-    'ptv.stop() posts correct postMessage',
+    'ptv.stop() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.stop();
       assert.equal(this.ptv.embed.preloadState.started, false);
@@ -158,7 +174,7 @@ QUnit.module('api', function(hooks) {
   );
 
   QUnit.test(
-    'ptv.timeUpdate() posts correct postMessage',
+    'ptv.timeUpdate() call is added to state if SDK is not ready',
     function (assert) {
       this.ptv.timeUpdate(5);
       assert.equal(this.ptv.embed.preloadState.time, 5);
