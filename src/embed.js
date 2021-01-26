@@ -120,7 +120,7 @@ class PtvEmbed {
   destroy() {
     this.el.parentNode.removeChild(this.el);
     this.el_ = null;
-    this.ready = false;
+    this.ready = undefined;
   }
 
   /**
@@ -262,6 +262,8 @@ class PtvEmbed {
         break;
 
       case SdkEvents.CONFIG_READY:
+        this.ready = true;
+        this.applyPreloadState()
         this.callbacks.onConfigReady(payload.data);
         break;
 
@@ -281,7 +283,6 @@ class PtvEmbed {
    * @todo This should be comprehensive to avoid any negative side-effects.
    */
   onLoad_() {
-    this.ready = true;
     try {
       if (this.el.contentDocument.body.innerText === 'NOT FOUND') {
         this.destroy();
@@ -289,10 +290,10 @@ class PtvEmbed {
     } catch (e) {
       // Could log this error, if needed.
     }
-    if (this.ready) this.applyPreloadState()
   }
 
   applyPreloadState() {
+    if (!this.ready) return;
     if (this.preloadState.config) this.load(this.preloadState.config);
     if (this.preloadState.started) this.start();
     else if (this.preloadState.started === false) this.stop();
