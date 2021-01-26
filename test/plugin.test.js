@@ -3,7 +3,7 @@ import QUnit from 'qunit';
 import sinon from 'sinon';
 import videojs from 'video.js';
 import plugin from '../src/plugin';
-import { ApiHosts, EmbedHosts, PlayerEvents, SdkEvents } from '../src/constants';
+import { ApiHosts, PlayerEvents, SdkEvents } from '../src/constants';
 
 /**
  * A mock iframe data url to pass to plugin so that we isolate tests to this library
@@ -22,7 +22,7 @@ window.addEventListener('message',(msg) => console.log('mock iframe message', ms
 <body>
 <script>
 if(window.parent) {
-  window.parent.postMessage(JSON.stringify({type:'ptv.sdk.ready'}), '*')
+  window.parent.postMessage(JSON.stringify({type:${SdkEvents.CONFIG_READY}), '*')
 }
 </script>
 </body>
@@ -40,7 +40,6 @@ const config = {
 
 /**
  * The mock local origin that the mock iframe content will load from.
- * It is basically the URL of the test runner.
  * @type {string}
  */
 const mockOrigin = 'https://'+config.embedHost;
