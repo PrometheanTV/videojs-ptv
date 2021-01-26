@@ -263,7 +263,7 @@ class PtvEmbed {
 
       case SdkEvents.CONFIG_READY:
         this.ready = true;
-        this.applyPreloadState();
+        this.applyPreloadState_();
         this.callbacks.onConfigReady(payload.data);
         break;
 
