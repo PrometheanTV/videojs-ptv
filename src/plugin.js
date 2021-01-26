@@ -61,13 +61,6 @@ class Ptv extends Plugin {
     super(player);
 
     this.setState(defaultState);
-    // An object that stores any state that gets changed before `this.embed` is
-    // ready
-    this.preloadState = {
-      started: undefined,
-      visible: undefined,
-      time: -1,
-    }
 
     this.options = videojs.mergeOptions(defaults, options);
 
@@ -92,19 +85,6 @@ class Ptv extends Plugin {
 
     // Create iframe instance.
     this.embed = new PtvEmbed(this.options, callbacks);
-    if (this.preloadState.started) {
-      this.embed.start();
-    } else if(this.preloadState.started === false) {
-      this.embed.stop();
-    }
-    if (this.preloadState.visible) {
-      this.embed.show();
-    } else if (this.preloadState.visible === false) {
-      this.embed.hide();
-    }
-    if(this.preloadState.time !== -1) {
-      this.embed.timeUpdate(this.preloadState.time);
-    }
 
     // Place iFrame after video element and before the poster image element.
     this.player.posterImage.el().before(this.embed.el);
@@ -218,8 +198,6 @@ class Ptv extends Plugin {
   hide() {
     if (this.embed) {
       this.embed.hide();
-    } else {
-      this.preloadState.visible = false;
     }
   }
 
@@ -242,8 +220,6 @@ class Ptv extends Plugin {
   show() {
     if (this.embed) {
       this.embed.show();
-    } else {
-      this.preloadState.visible = true;
     }
   }
 
@@ -253,8 +229,6 @@ class Ptv extends Plugin {
   start() {
     if (this.embed) {
       this.embed.start();
-    } else {
-      this.preloadState.started = true;
     }
   }
 
@@ -264,8 +238,6 @@ class Ptv extends Plugin {
   stop() {
     if (this.embed) {
       this.embed.stop();
-    } else {
-      this.preloadState.started = false;
     }
   }
 
@@ -277,8 +249,6 @@ class Ptv extends Plugin {
   timeUpdate(seconds) {
     if (this.embed) {
       this.embed.timeUpdate(seconds);
-    } else {
-      this.preloadState.time = seconds;
     }
   }
 }
