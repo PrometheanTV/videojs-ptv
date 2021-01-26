@@ -60,6 +60,7 @@ class Ptv extends Plugin {
     // the parent class will add player under this.player
     super(player);
 
+    this.setState(defaultState);
     // An object that stores any state that gets changed before `this.embed` is
     // ready
     this.preloadState = {
@@ -263,6 +264,7 @@ class Ptv extends Plugin {
   stop() {
     if (this.embed) {
       this.embed.stop();
+    } else {
       this.preloadState.started = false;
     }
   }
