@@ -117,7 +117,7 @@ QUnit.module('preload state', function(hooks) {
     'ptv.hide()',
     function(assert) {
       this.ptv.hide();
-      assert.equal(this.ptv.embed.preloadState.visible, false);
+      assert.equal(this.ptv.embed.preloadState_.visible, false);
     }
   );
 
@@ -125,7 +125,7 @@ QUnit.module('preload state', function(hooks) {
     'ptv.load() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.load('url');
-      assert.equal(this.ptv.embed.preloadState.config, 'url');
+      assert.equal(this.ptv.embed.preloadState_.config, 'url');
     }
   );
 
@@ -133,7 +133,7 @@ QUnit.module('preload state', function(hooks) {
     'ptv.show() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.show();
-      assert.equal(this.ptv.embed.preloadState.visible, true);
+      assert.equal(this.ptv.embed.preloadState_.visible, true);
     }
   );
 
@@ -141,7 +141,7 @@ QUnit.module('preload state', function(hooks) {
     'ptv.start() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.start();
-      assert.equal(this.ptv.embed.preloadState.started, true);
+      assert.equal(this.ptv.embed.preloadState_.started, true);
     }
   );
 
@@ -149,7 +149,7 @@ QUnit.module('preload state', function(hooks) {
     'ptv.stop() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.stop();
-      assert.equal(this.ptv.embed.preloadState.started, false);
+      assert.equal(this.ptv.embed.preloadState_.started, false);
     }
   );
 
@@ -157,7 +157,7 @@ QUnit.module('preload state', function(hooks) {
     'ptv.timeUpdate() call is added to state if SDK is not ready',
     function(assert) {
       this.ptv.timeUpdate(5);
-      assert.equal(this.ptv.embed.preloadState.time, 5);
+      assert.equal(this.ptv.embed.preloadState_.time, 5);
     }
   );
 });
