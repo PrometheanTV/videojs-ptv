@@ -252,7 +252,7 @@ class PtvEmbed {
    * Get a promise for a method.
    *
    * @param {string} name The API method to call.
-   * @param {Object} [args={}] Arguments to send via postMessage.
+   * @param {*} args Arguments to send via postMessage.
    * @todo We should consider making this promised based.
    * @private
    */
