@@ -2,12 +2,16 @@ import { SdkEvents } from '../src/constants';
 export const PTV_TEST_CALLBACK = 'ptv_test_callback';
 
 /**
- * Iframe content that allows us to verify messages sent via `postMessage`.
- * The mock target listens for messages sent by videojs-ptv and echoes them
- * back to the host window to a global function at window[PTV_TEST_CALLBACK]()
+ * This markup is injected directly into the Iframe via `srcdoc` and allows us
+ * to verify messages sent via `postMessage`.
  *
- * Tests can assign a function to window[PTV_TEST_CALLBACK] and assert the
- * payload that was received by the target via the window 'message' evt.
+ * The target (html page below) listens for messages sent by the videojs-ptv
+ * plugin and echoes any received messages back to the host window via a
+ * function defined at `window[PTV_TEST_CALLBACK]`
+ *
+ * Tests can dynamically assign functions to window[PTV_TEST_CALLBACK] allowing
+ * assertions to be made about payloads received by the target window.
+ *
  * @type {string}
  */
 export const iframeMarkup = `<!DOCTYPE html>
