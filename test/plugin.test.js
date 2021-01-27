@@ -79,7 +79,7 @@ QUnit.module('videojs-ptv', function(hooks) {
 
   QUnit.test('applies configuration to iframe URL params', function(assert) {
     const iframe = this.fixture.querySelector('iframe.ptv-iframe');
-    console.log(configWithDataUrl);
+
     assert.ok(
       iframe.src.startsWith(`https://${configWithDataUrl.embedHost}`),
       `loads from config.embedHost = ${configWithDataUrl.embedHost}`
