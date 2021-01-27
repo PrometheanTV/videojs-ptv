@@ -21,13 +21,6 @@ const configWithDataUrl = Object.assign(
   { embedHost: 'data:text/html;charset=utf-8,' + encodeURIComponent(iframeMarkup) }
 );
 
-/**
- * The mock local origin that the mock iframe content will load from.
- * @type {string}
- */
-const mockOrigin = 'https://' + config.embedHost;
-//const mockOrigin = 'http://localhost:9999';// + config.embedHost;
-
 const reParam = (key, value) => new RegExp(`\\?.*&${key}=${value}(&|$)`);
 
 const Player = videojs.getComponent('Player');
