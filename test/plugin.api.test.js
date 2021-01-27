@@ -6,15 +6,6 @@ import { ApiHosts } from '../src/constants';
 import { iframeMarkup, PTV_TEST_CALLBACK } from './mocks';
 import PtvEmbed from '../src/embed';
 
-// Supply mock implementations of PtvEmbed static functions.
-// (easier than mocking the module!)
-//
-// Override `assignIframeSource` so that we can load our test iframe content.
-PtvEmbed.assignIframeSource = (el) => el.setAttribute('srcdoc', iframeMarkup);
-// Override `getOrigin` so that we can set the correct origin for the mock iframeMarkup.
-// This should match the origin that the tests are run from
-PtvEmbed.getOrigin = () => 'http://localhost:9999';
-
 const config = {
   // Test channel and stream
   apiHost: ApiHosts.PRODUCTION,
@@ -38,7 +29,22 @@ const config = {
  * API methods called before the SDK has loaded are then correctly applied to
  * the SDK once it ready.
  */
-QUnit.module.only('communication with target iframe', function(hooks) {
+QUnit.module('communication with target iframe', function(hooks) {
+  let assignIframeSource_;
+  let getOrigin_;
+
+  hooks.before(function() {
+    assignIframeSource_ = PtvEmbed.assignIframeSource;
+    getOrigin_ = PtvEmbed.getOrigin;
+    // Supply mock implementations of PtvEmbed static functions.
+    // (easier than mocking the module!)
+    //
+    // Override `assignIframeSource` so that we can load our test iframe content.
+    PtvEmbed.assignIframeSource = (el) => el.setAttribute('srcdoc', iframeMarkup);
+    // Override `getOrigin` so that we can set the correct origin for the mock iframeMarkup.
+    // This should match the origin that the tests are run from
+    PtvEmbed.getOrigin = () => 'http://localhost:9999';
+  });
 
   hooks.beforeEach(function() {
     return new Promise((resolve, _) => {
@@ -47,7 +53,7 @@ QUnit.module.only('communication with target iframe', function(hooks) {
       this.fixture.appendChild(this.video);
       this.player = videojs(this.video);
       this.ptv = this.player.ptv(config);
-      this.player.ready(()=>resolve());
+      this.player.ready(() => resolve());
     });
   });
 
@@ -57,6 +63,8 @@ QUnit.module.only('communication with target iframe', function(hooks) {
 
   hooks.after(function() {
     delete window[PTV_TEST_CALLBACK];
+    PtvEmbed.assignIframeSource = assignIframeSource_;
+    PtvEmbed.getOrigin = getOrigin_;
   });
 
   const testFactory = (apiMethod, apiArgs) =>
