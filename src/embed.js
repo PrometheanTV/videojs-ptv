@@ -238,7 +238,7 @@ class PtvEmbed {
    * @param {Object} [args={}] Arguments to send via postMessage.
    * @todo We should consider making this promised based.
    */
-  callMethod_(name, args = {}) {
+  callMethod_(name, args) {
     postMessage(this, name, args);
   }
 
