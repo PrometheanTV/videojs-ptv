@@ -31,32 +31,29 @@ const createDefaultPreloadState = () => ({
  * exposes the SDK API to the videojs plugin.
  */
 class PtvEmbed {
-  isSdkReady_ = false;
-  preloadState_ = createDefaultPreloadState();
-
   /**
    * We make the actual assignment of the iframe source a static function to allow
    * tests to easily override the implementation (e.g., to set some custom
    * iframe content).
    *
-   * @param el The iframe DOM element
-   * @param origin The origin of the iframe content
-   * @param config The SDK config to be passed as URL params to the SDK
+   * @param {HTMLIframeElement} el The iframe DOM element
+   * @param {string} origin The origin of the iframe content
+   * @param {Object} config The SDK config to be passed as URL params to the SDK
    */
   static assignIframeSource(el, origin, config) {
     el.setAttribute('src', origin + '?' + serialize(config));
-  };
+  }
 
   /**
    * This static function is overriden in tests when mock iframe content is set
    * via `PtvEmbed.assignIframeSource`.
    *
-   * @param options
-   * @returns {string}
+   * @param {Object} options Embed options.
+   * @return {string} Returns full-qualified embed host URL.
    */
   static getOrigin(options) {
     return PROTOCOL + options.embedHost;
-  };
+  }
 
   /**
    * Main constructor function.
@@ -67,14 +64,19 @@ class PtvEmbed {
    *  received.
    */
   constructor(options, callbacks) {
-    const config = this.config_ = videojs.mergeOptions(options, requiredOptions);
-    const origin = this.origin_ = PtvEmbed.getOrigin(options);
-    // Create iFrame.
-    const el = window.document.createElement('iframe');
+    // Initialize private instance properties.
+    this.isSdkReady_ = false;
+    this.preloadState_ = createDefaultPreloadState();
 
-    el.className = 'ptv-iframe';
-    // Set iFrame CSS styles.
-    el.style.cssText = `
+    // Generate config options.
+    this.config_ = videojs.mergeOptions(options, requiredOptions);
+    this.origin_ = PtvEmbed.getOrigin(options);
+
+    // Create iFrame element.
+    this.el_ = window.document.createElement('iframe');
+    this.el_.onload = this.onLoad_.bind(this);
+    this.el_.className = 'ptv-iframe';
+    this.el_.style.cssText = `
       position: absolute;
       top: 0;
       left: 0;
@@ -85,12 +87,8 @@ class PtvEmbed {
       border: none;
     `;
 
-    // Store element to instance.
-    this.el_ = el;
-    this.el_.onload = this.onLoad_.bind(this);
-
     // Assign iframe source to embed.
-    PtvEmbed.assignIframeSource(el, origin, config);
+    PtvEmbed.assignIframeSource(this.el_, this.origin_, this.config_);
 
     // Store callbacks from plugin.
     this.callbacks_ = videojs.mergeOptions(defaultCallbacks, callbacks);
@@ -153,7 +151,6 @@ class PtvEmbed {
     } else {
       this.preloadState_.visible = false;
     }
-
   }
 
   /**
@@ -167,7 +164,6 @@ class PtvEmbed {
     } else {
       this.preloadState_.config = config;
     }
-
   }
 
   /**
@@ -226,7 +222,6 @@ class PtvEmbed {
     } else {
       this.preloadState_.started = true;
     }
-
   }
 
   /**
@@ -238,7 +233,6 @@ class PtvEmbed {
     } else {
       this.preloadState_.started = false;
     }
-
   }
 
   /**
@@ -252,7 +246,6 @@ class PtvEmbed {
     } else {
       this.preloadState_.time = seconds;
     }
-
   }
 
   /**
@@ -323,22 +316,28 @@ class PtvEmbed {
     if (!this.isSdkReady_) {
       return;
     }
+
     if (this.preloadState_.config) {
       this.load(this.preloadState_.config);
     }
+
     if (this.preloadState_.started) {
       this.start();
     } else if (this.preloadState_.started === false) {
       this.stop();
     }
+
     if (this.preloadState_.visible) {
       this.show();
     } else if (this.preloadState_.visible === false) {
       this.hide();
     }
+
     if (this.preloadState_.time > -1) {
       this.timeUpdate(this.preloadState_.time);
     }
+
+    // Revert properties to defaults.
     this.preloadState_ = createDefaultPreloadState();
   }
 }
