@@ -34,15 +34,14 @@ QUnit.module('communication with target iframe', function(hooks) {
   let getOrigin_;
 
   hooks.before(function() {
+    // Store initial implementations of functions so that that they can be
+    // re-assigned once these tests are complete
     assignIframeSource_ = PtvEmbed.assignIframeSource;
     getOrigin_ = PtvEmbed.getOrigin;
-    // Supply mock implementations of PtvEmbed static functions.
-    // (easier than mocking the module!)
-    //
     // Override `assignIframeSource` so that we can load our test iframe content.
     PtvEmbed.assignIframeSource = (el) => el.setAttribute('srcdoc', iframeMarkup);
-    // Override `getOrigin` so that we can set the correct origin for the mock iframeMarkup.
-    // This should match the origin that the tests are run from
+    // Override `getOrigin` so that we can set the correct origin for iframe test target,
+    // this should match the origin of the test runner
     PtvEmbed.getOrigin = () => 'http://localhost:9999';
   });
 
