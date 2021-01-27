@@ -60,6 +60,8 @@ class Ptv extends Plugin {
     // the parent class will add player under this.player
     super(player);
 
+    this.setState(defaultState);
+
     this.options = videojs.mergeOptions(defaults, options);
 
     // Setup other player events
