@@ -132,7 +132,7 @@ class Ptv extends Plugin {
       this.player.poster(poster.loading);
     }
 
-    // Use video from API, if no video started.
+    // Use video from API, if no video playing.
     if (!this.player.src() && this.player.canPlayType(type)) {
       this.player.src(src);
     }
