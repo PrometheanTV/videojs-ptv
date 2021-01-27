@@ -45,26 +45,12 @@ class PtvEmbed {
 
     this.preloadState = createDefaultPreloadState();
 
-    const config = videojs.mergeOptions(options, requiredOptions);
-    const origin = PROTOCOL + options.embedHost;
-
+    const config = this.config_ = videojs.mergeOptions(options, requiredOptions);
+    const origin = this.origin_ = PtvEmbed.getOrigin(options);
     // Create iFrame.
     const el = window.document.createElement('iframe');
 
     el.className = 'ptv-iframe';
-
-    // eslint-disable-next-line no-warning-comments
-    // TODO this is a hack for testing.
-    //  If we assign some raw markup to `options.embedHost` then we
-    //  set the iframe.srcdoc with that markup and set `origin_` to
-    //  match the test runner host assumed to be 'http://localhost:9999'
-    if (options.embedHost.startsWith('<!DOCTYPE html>')) {
-      el.setAttribute('srcdoc', options.embedHost);
-      this.origin_ = 'http://localhost:9999';
-    } else {
-      el.setAttribute('src', origin + '?' + serialize(config));
-      this.origin_ = origin;
-    }
     // Set iFrame CSS styles.
     el.style.cssText = `
       position: absolute;
@@ -81,6 +67,7 @@ class PtvEmbed {
     this.el_ = el;
     this.el_.onload = this.onLoad_.bind(this);
 
+    PtvEmbed.assignIframeSource(el, origin, config);
     // Store callbacks from plugin.
     this.callbacks_ = videojs.mergeOptions(defaultCallbacks, callbacks);
 
@@ -331,5 +318,27 @@ class PtvEmbed {
     this.preloadState = createDefaultPreloadState();
   }
 }
+/*
+ * @param el The iframe DOM element
+ * @param origin The origin of the iframe content
+ * @param config The SDK config to be passed as URL params to the SDK
+ *
+ * We make the actual assignment of the iframe source a static function to allow
+ * tests to easily override the implementation, for example to set some custom
+ * iframe content
+ */
+PtvEmbed.assignIframeSource = function(el, origin, config) {
+  el.setAttribute('src', origin + '?' + serialize(config));
+};
+/*
+ * @param options
+ * @returns {string}
+ *
+ * This static function is overriden in tests when mock iframe content is set
+ * via `PtvEmbed.assignIframeSource`
+ */
+PtvEmbed.getOrigin = function(options) {
+  return PROTOCOL + options.embedHost;
+};
 
 export default PtvEmbed;
