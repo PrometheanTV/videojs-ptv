@@ -254,6 +254,7 @@ class PtvEmbed {
    * @param {string} name The API method to call.
    * @param {Object} [args={}] Arguments to send via postMessage.
    * @todo We should consider making this promised based.
+   * @private
    */
   callMethod_(name, args) {
     postMessage(this, name, args);
@@ -264,6 +265,7 @@ class PtvEmbed {
    * overlays were interacted with.
    *
    * @param {Object} message Message sent from iframe postMessage.
+   * @private
    */
   handleMessage_(message) {
     const { data, origin } = message;
@@ -296,6 +298,7 @@ class PtvEmbed {
    * Handle iFrame onload event. Destroys instance if any errors occur.
    *
    * @todo This should be comprehensive to avoid any negative side-effects.
+   * @private
    */
   onLoad_() {
     try {
@@ -308,33 +311,39 @@ class PtvEmbed {
   }
 
   /**
-   * Applies any state changes that occurred before the SDK was ready
+   * Applies any state changes that occurred before the SDK was ready.
    *
    * @private
    */
   applyPreloadState_() {
+    const { config, started, time, visible } = this.preloadState_;
+
     if (!this.isSdkReady_) {
       return;
     }
 
-    if (this.preloadState_.config) {
-      this.load(this.preloadState_.config);
+    if (config) {
+      this.load(config);
     }
 
-    if (this.preloadState_.started) {
+    if (started === true) {
       this.start();
-    } else if (this.preloadState_.started === false) {
+    }
+
+    if (started === false) {
       this.stop();
     }
 
-    if (this.preloadState_.visible) {
+    if (visible === true) {
       this.show();
-    } else if (this.preloadState_.visible === false) {
+    }
+
+    if (visible === false) {
       this.hide();
     }
 
-    if (this.preloadState_.time > -1) {
-      this.timeUpdate(this.preloadState_.time);
+    if (time > -1) {
+      this.timeUpdate(time);
     }
 
     // Revert properties to defaults.
