@@ -273,14 +273,16 @@ class PtvEmbed {
     if (origin === this.origin_) {
       const payload = parseMessageData(data);
 
+      // if we received any kind of message then the SDK has loaded
+      this.isSdkReady_ = true;
+      this.applyPreloadState_();
+
       switch (payload.type) {
       case SdkEvents.CONFIG_FAILURE:
         this.callbacks.onConfigFailure();
         break;
 
       case SdkEvents.CONFIG_READY:
-        this.isSdkReady_ = true;
-        this.applyPreloadState_();
         this.callbacks.onConfigReady(payload.data);
         break;
 
