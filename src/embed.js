@@ -65,7 +65,7 @@ class PtvEmbed {
    */
   constructor(options, callbacks) {
     // Initialize private instance properties.
-    this.isSdkReady_ = false;
+    this.isSdkLoaded_ = false;
     this.preloadState_ = createDefaultPreloadState();
 
     // Generate config options.
@@ -139,14 +139,14 @@ class PtvEmbed {
   destroy() {
     this.el.parentNode.removeChild(this.el);
     this.el_ = null;
-    this.isSdkReady_ = undefined;
+    this.isSdkLoaded_ = undefined;
   }
 
   /**
    * Hide overlays.
    */
   hide() {
-    if (this.isSdkReady_) {
+    if (this.isSdkLoaded_) {
       this.callMethod_('hide');
     } else {
       this.preloadState_.visible = false;
@@ -159,7 +159,7 @@ class PtvEmbed {
    * @param {Object} config Config object passed to ptv.js
    */
   load(config) {
-    if (this.isSdkReady_) {
+    if (this.isSdkLoaded_) {
       this.callMethod_('load', config);
     } else {
       this.preloadState_.config = config;
@@ -206,7 +206,7 @@ class PtvEmbed {
    * Show overlays.
    */
   show() {
-    if (this.isSdkReady_) {
+    if (this.isSdkLoaded_) {
       this.callMethod_('show');
     } else {
       this.preloadState_.visible = true;
@@ -217,7 +217,7 @@ class PtvEmbed {
    * Start and show overlays.
    */
   start() {
-    if (this.isSdkReady_) {
+    if (this.isSdkLoaded_) {
       this.callMethod_('start');
     } else {
       this.preloadState_.started = true;
@@ -228,7 +228,7 @@ class PtvEmbed {
    * Stop and hide overlays.
    */
   stop() {
-    if (this.isSdkReady_) {
+    if (this.isSdkLoaded_) {
       this.callMethod_('stop');
     } else {
       this.preloadState_.started = false;
@@ -241,7 +241,7 @@ class PtvEmbed {
    * @param {number} seconds Player playhead in seconds.
    */
   timeUpdate(seconds) {
-    if (this.isSdkReady_) {
+    if (this.isSdkLoaded_) {
       this.callMethod_('timeUpdate', seconds);
     } else {
       this.preloadState_.time = seconds;
@@ -273,14 +273,16 @@ class PtvEmbed {
     if (origin === this.origin_) {
       const payload = parseMessageData(data);
 
+      // If we receive any kind of message then we know the SDK has loaded.
+      this.isSdkLoaded_ = true;
+      this.applyPreloadState_();
+
       switch (payload.type) {
       case SdkEvents.CONFIG_FAILURE:
         this.callbacks.onConfigFailure();
         break;
 
       case SdkEvents.CONFIG_READY:
-        this.isSdkReady_ = true;
-        this.applyPreloadState_();
         this.callbacks.onConfigReady(payload.data);
         break;
 
@@ -318,7 +320,7 @@ class PtvEmbed {
   applyPreloadState_() {
     const { config, started, time, visible } = this.preloadState_;
 
-    if (!this.isSdkReady_) {
+    if (!this.isSdkLoaded_) {
       return;
     }
 
