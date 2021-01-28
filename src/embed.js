@@ -273,7 +273,7 @@ class PtvEmbed {
     if (origin === this.origin_) {
       const payload = parseMessageData(data);
 
-      // if we received any kind of message then the SDK has loaded
+      // If we receive any kind of message then we know the SDK has loaded.
       this.isSdkReady_ = true;
       this.applyPreloadState_();
 
