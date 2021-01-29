@@ -1,20 +1,11 @@
 import { SdkEvents } from '../src/constants';
 export const PTV_TEST_CALLBACK = 'ptv_test_callback';
 
-/**
- * This markup is injected directly into the Iframe via `srcdoc` and allows us
- * to verify messages sent via `postMessage`.
+/*
  *
- * The target (html page below) listens for messages sent by the videojs-ptv
- * plugin and echoes any received messages back to the host window via a
- * function defined at `window[PTV_TEST_CALLBACK]`
- *
- * Tests can dynamically assign functions to window[PTV_TEST_CALLBACK] allowing
- * assertions to be made about payloads received by the target window.
- *
- * @type {string}
+ * @type {function(string):any}
  */
-export const iframeMarkup = `<!DOCTYPE html>
+export const makeIframeSource = initialEvent => `<!DOCTYPE html>
 <html>
 <head>
 <script>
@@ -33,10 +24,25 @@ window.addEventListener('message', evt => {
 <script>
 if (window.parent) {
   console.log('iframe test target sending CONFIG_READY');
-  const msg = JSON.stringify({ type: "${SdkEvents.CONFIG_READY}", data: {} });
+  const msg = JSON.stringify({ type: "${initialEvent}", data: {} });
   window.parent.postMessage(msg, '*')
 }
 </script>
 </body>
 </html>
 `;
+
+/*
+ * This markup is injected directly into the Iframe via `srcdoc` and allows us
+ * to verify messages sent via `postMessage`.
+ *
+ * The target (html page below) listens for messages sent by the videojs-ptv
+ * plugin and echoes any received messages back to the host window via a
+ * function defined at `window[PTV_TEST_CALLBACK]`
+ *
+ * Tests can dynamically assign functions to window[PTV_TEST_CALLBACK] allowing
+ * assertions to be made about payloads received by the target window.
+ * @type {*}
+ */
+export const iframeMarkup = makeIframeSource(SdkEvents.CONFIG_READY);
+
