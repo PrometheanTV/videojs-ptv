@@ -31,7 +31,7 @@
     "test:unit": "karma start scripts/karma.conf.js",
     "test:verify": "vjsverify --verbose",
     "start-server": "npx http-server .",
-    "test-e2e": "jest",
+    "e2e": "jest -c jest.config.js",
     "update-changelog": "conventional-changelog -p videojs -i CHANGELOG.md -s",
     "preversion": "npm test",
     "version": "is-prerelease || npm run update-changelog && git add CHANGELOG.md",
