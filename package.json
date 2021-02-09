@@ -88,6 +88,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "@videojs/generator-helpers": "^2.0.2",
+    "@xstate/test": "^0.4.1",
     "expect-puppeteer": "^4.4.0",
     "jsdoc": "^3.6.6",
     "jest": "^26.6.3",
@@ -102,6 +103,7 @@
     "videojs-generate-rollup-config": "^6.1.0",
     "videojs-generator-verify": "^3.0.1",
     "videojs-languages": "^2.0.0",
-    "videojs-standard": "^8.0.3"
+    "videojs-standard": "^8.0.3",
+    "xstate": "^4.16.2"
   }
 }

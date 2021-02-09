@@ -25,12 +25,13 @@
           bigPlayButton: true,
         }));
 
-        var ptv = (window.ptv = player.ptv({
-          // Test channel and stream
+        const params = new URLSearchParams(window.location.search);
+        const config = {
           channelId: "5c701be7dc3d20080e4092f4",
           streamId: "5de7e7c2a6adde5211684519",
-          debug: true,
-        }));
+          embedHost: params.get('embedHost')
+        };
+        var ptv = (window.ptv = player.ptv(config));
       })(window, window.videojs);
     </script>
   </body>
