@@ -60,6 +60,7 @@ class Ptv extends Plugin {
     // the parent class will add player under this.player
     super(player);
 
+    this.embedQueue = [];
     this.setState(defaultState);
 
     this.options = videojs.mergeOptions(defaults, options);
@@ -69,6 +70,22 @@ class Ptv extends Plugin {
 
     // Handle player events.
     this.player.ready(this.handlePlayerReady_.bind(this));
+  }
+
+  /* Calls method in embed with args */
+  callEmbed_(method, ...args) {
+    if (this.embed) {
+      this.embed[method](...args);
+    } else {
+      this.embedQueue.push([method, ...args]);
+    }
+  }
+
+  /* Empties embed queue */
+  emptyEmbedQueue_() {
+    while (this.embedQueue.length) {
+      this.callEmbed_(...this.embedQueue.shift());
+    }
   }
 
   /**
@@ -85,6 +102,7 @@ class Ptv extends Plugin {
 
     // Create iframe instance.
     this.embed = new PtvEmbed(this.options, callbacks);
+    this.emptyEmbedQueue_();
 
     // Place iFrame after video element and before the poster image element.
     this.player.posterImage.el().before(this.embed.el);
@@ -160,7 +178,8 @@ class Ptv extends Plugin {
     this.player.on(PlayerEvents.PAUSE, () => this.hide());
     this.player.on(PlayerEvents.PLAY, () => this.show());
     this.player.on(PlayerEvents.TIME_UPDATE, () =>
-      this.timeUpdate(this.player.currentTime()));
+      this.timeUpdate(this.player.currentTime())
+    );
   }
 
   /**
@@ -183,6 +202,7 @@ class Ptv extends Plugin {
     this.removePlayerListeners_();
     if (this.embed) {
       this.embed.dispose();
+      this.embedQueue = [];
     }
     super.dispose();
   }
@@ -196,9 +216,7 @@ class Ptv extends Plugin {
    * Hide overlays.
    */
   hide() {
-    if (this.embed) {
-      this.embed.hide();
-    }
+    this.callEmbed_('hide');
   }
 
   /**
@@ -208,37 +226,28 @@ class Ptv extends Plugin {
    */
   load(config) {
     this.setState(defaultState);
-
-    if (this.embed) {
-      this.embed.load(config);
-    }
+    this.callEmbed_('load', config);
   }
 
   /**
    * Show overlays.
    */
   show() {
-    if (this.embed) {
-      this.embed.show();
-    }
+    this.callEmbed_('show');
   }
 
   /**
    * Start and show overlays.
    */
   start() {
-    if (this.embed) {
-      this.embed.start();
-    }
+    this.callEmbed_('start');
   }
 
   /**
    * Stop and hide overlays.
    */
   stop() {
-    if (this.embed) {
-      this.embed.stop();
-    }
+    this.callEmbed_('stop');
   }
 
   /**
@@ -247,9 +256,7 @@ class Ptv extends Plugin {
    * @param {number} seconds Player playhead in seconds.
    */
   timeUpdate(seconds) {
-    if (this.embed) {
-      this.embed.timeUpdate(seconds);
-    }
+    this.callEmbed_('timeUpdate', seconds);
   }
 }
 
