@@ -64,9 +64,6 @@ class Ptv extends Plugin {
 
     this.options = videojs.mergeOptions(defaults, options);
 
-    // Setup other player events
-    this.addPlayerListeners_();
-
     // Handle player events.
     this.player.ready(this.handlePlayerReady_.bind(this));
   }
@@ -85,6 +82,9 @@ class Ptv extends Plugin {
 
     // Create iframe instance.
     this.embed = new PtvEmbed(this.options, callbacks);
+
+    // Setup other player events
+    this.addPlayerListeners_();
 
     // Place iFrame after video element and before the poster image element.
     this.player.posterImage.el().before(this.embed.el);
@@ -154,7 +154,10 @@ class Ptv extends Plugin {
    * Add videojs player listeners.
    */
   addPlayerListeners_() {
-    this.player.one(PlayerEvents.PLAY, () => this.start());
+    this.player.one(PlayerEvents.PLAYING, () => {
+      console.log('playing from videojs')
+      this.start()
+    });
     this.player.on(PlayerEvents.ENDED, () => this.stop());
     this.player.on(PlayerEvents.ERROR, () => this.stop());
     this.player.on(PlayerEvents.PAUSE, () => this.hide());
@@ -172,6 +175,7 @@ class Ptv extends Plugin {
       PlayerEvents.ERROR,
       PlayerEvents.PAUSE,
       PlayerEvents.PLAY,
+      PlayerEvents.PLAYING,
       PlayerEvents.TIME_UPDATE
     ]);
   }

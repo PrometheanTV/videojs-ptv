@@ -274,8 +274,10 @@ class PtvEmbed {
       const payload = parseMessageData(data);
 
       // If we receive any kind of message then we know the SDK has loaded.
-      this.isSdkLoaded_ = true;
-      this.applyPreloadState_();
+      if(!this.isSdkLoaded_) {
+        this.isSdkLoaded_ = true;
+        this.applyPreloadState_();
+      }
 
       switch (payload.type) {
       case SdkEvents.CONFIG_FAILURE:
