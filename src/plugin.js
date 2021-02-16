@@ -155,8 +155,7 @@ class Ptv extends Plugin {
    */
   addPlayerListeners_() {
     this.player.one(PlayerEvents.PLAYING, () => {
-      console.log('playing from videojs')
-      this.start()
+      this.start();
     });
     this.player.on(PlayerEvents.ENDED, () => this.stop());
     this.player.on(PlayerEvents.ERROR, () => this.stop());
