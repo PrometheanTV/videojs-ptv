@@ -16,6 +16,7 @@ const Plugin = videojs.getPlugin('plugin');
 // Default options for the plugin.
 const defaults = {
   apiHost: ApiHosts.PRODUCTION,
+  autoWireEvents: true,
   channelId: null,
   debug: false,
   enableGeoBlock: false,
@@ -154,6 +155,7 @@ class Ptv extends Plugin {
    * Add videojs player listeners.
    */
   addPlayerListeners_() {
+    if (!this.options.autoWireEvents) return;
     this.player.one(PlayerEvents.PLAYING, () => {
       this.start();
     });
@@ -169,6 +171,7 @@ class Ptv extends Plugin {
    * Remove videojs player listeners.
    */
   removePlayerListeners_() {
+    if (!this.options.autoWireEvents) return;
     this.player.off([
       PlayerEvents.ENDED,
       PlayerEvents.ERROR,
