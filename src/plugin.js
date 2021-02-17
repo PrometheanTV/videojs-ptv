@@ -156,9 +156,7 @@ class Ptv extends Plugin {
    */
   addPlayerListeners_() {
     if (!this.options.autoWireEvents) return;
-    this.player.one(PlayerEvents.PLAYING, () => {
-      this.start();
-    });
+    this.player.one(PlayerEvents.PLAYING, () => this.start());
     this.player.on(PlayerEvents.ENDED, () => this.stop());
     this.player.on(PlayerEvents.ERROR, () => this.stop());
     this.player.on(PlayerEvents.PAUSE, () => this.hide());
