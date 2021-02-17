@@ -155,7 +155,7 @@ class Ptv extends Plugin {
    * Add videojs player listeners.
    */
   addPlayerListeners_() {
-    if (!this.options.autoWireEvents) return;
+    if (!this.options.autoWireEvents) { return };
     this.player.one(PlayerEvents.PLAYING, () => {
       this.start();
     });
@@ -171,7 +171,7 @@ class Ptv extends Plugin {
    * Remove videojs player listeners.
    */
   removePlayerListeners_() {
-    if (!this.options.autoWireEvents) return;
+    if (!this.options.autoWireEvents) { return };
     this.player.off([
       PlayerEvents.ENDED,
       PlayerEvents.ERROR,
