@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>videojs-ptv ima Demo</title>
+    <link href="../node_modules/video.js/dist/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.7.0/videojs-contrib-ads.min.css" />
+    <link rel="stylesheet" href="https://googleads.github.io/videojs-ima/dist/videojs.ima.css" />
+  </head>
+  <body>
+    <video
+      id="videojs-ptv-player"
+      autoplay
+      class="video-js vjs-default-skin"
+      data-setup='{"fluid": true}'
+      controls
+    ></video>
+    <script src="../node_modules/video.js/dist/video.js"></script>
+    <script src="../dist/videojs-ptv.js"></script>
+    <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.7.0/videojs-contrib-ads.min.js"></script>
+    <script src="https://googleads.github.io/videojs-ima/dist/videojs.ima.js"></script>
+
+
+    <script>
+      (function (window, videojs) {
+        var player = (window.player = videojs("videojs-ptv-player", {
+          // Toggle button to test click handling proxy
+          bigPlayButton: true,
+        }));
+
+        player.ima({ adTagUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&' +
+      'iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&' +
+      'impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&' +
+      'cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&' +
+      'vid=short_onecue&correlator=' })
+
+        var ptv = (window.ptv = player.ptv({
+          // Test channel and stream
+          channelId: "5c701be7dc3d20080e4092f4",
+          streamId: "5de7e7c2a6adde5211684519",
+          debug: true,
+        }));
+      })(window, window.videojs);
+    </script>
+  </body>
+</html>
