@@ -10,6 +10,10 @@ Then, to run tests
 
   npm run start-https
   npm run e2e
+
+The SDK in prod environment is used by default. To run against specific SDK host (e.g. dev server)
+
+  PTV_SDK_HOST=localhost:4000 npm run e2e
   
 Read about Playwright here https://playwright.dev/docs/intro
 
