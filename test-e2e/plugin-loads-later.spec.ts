@@ -28,7 +28,7 @@ const evaluateConfigLoadOutcome = () =>
   });
 
 describe('videojs-ptv plugin', () => {
-  it('should display `iframe.ptv-iframe` on page', async ({ mockedContext }) => {
+  it('should load SDK and receive config', async ({ mockedContext }) => {
     const page = await mockedContext.newPage();
     await page.goto(testUrl);
     await page.waitForSelector('iframe.ptv-iframe');
