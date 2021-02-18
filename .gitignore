@@ -31,3 +31,7 @@ docs/api/
 test/dist/
 .eslintcache
 .yo-rc.json
+
+# local dev certs
+*.pem
+
