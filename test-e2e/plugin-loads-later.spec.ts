@@ -1,4 +1,4 @@
-import { expect, describe, it } from './fixture/plugin-test';
+import { expect, describe, it } from './fixture/plugin-env';
 
 const testUrl = `https://localhost:8080/examples/lazy-load-plugin.html`;
 
@@ -32,7 +32,7 @@ describe('videojs-ptv plugin', () => {
     const page = await mockedContext.newPage();
     await page.goto(testUrl);
     await page.waitForSelector('iframe.ptv-iframe');
-    const configData = await page.evaluate(() => evaluateConfigLoadOutcome());
+    const configData = await page.evaluate(evaluateConfigLoadOutcome);
     expect(configData).toBeDefined();
   });
 });
