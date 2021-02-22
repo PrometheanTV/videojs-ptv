@@ -179,9 +179,9 @@ QUnit.module('player events', function(hooks) {
   QUnit.test('play starts plugin only once', function(assert) {
     const spy = sinon.spy(this.ptv, 'start');
 
-    this.player.trigger(PlayerEvents.PLAY);
+    this.player.trigger(PlayerEvents.PLAYING);
     assert.ok(spy.calledOnce, 'api called');
-    this.player.trigger(PlayerEvents.PLAY);
+    this.player.trigger(PlayerEvents.PLAYING);
     assert.ok(spy.calledOnce, 'api called only once');
   });
 

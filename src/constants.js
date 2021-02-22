@@ -50,6 +50,7 @@ export const PlayerEvents = Object.freeze({
   ERROR: 'error',
   PAUSE: 'pause',
   PLAY: 'play',
+  PLAYING: 'playing',
   TIME_UPDATE: 'timeupdate'
 });
 
