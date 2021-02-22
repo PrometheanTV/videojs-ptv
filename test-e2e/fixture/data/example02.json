@@ -1,0 +1,941 @@
+{
+  "channelId": "5cb6119567bff26435ec07a9",
+  "channel": {
+    "_id": "5cb6119567bff26435ec07a9",
+    "name": "DrDoom",
+    "alwaysLive": false,
+    "defaultStreamSetting": "last",
+    "users": [],
+    "user": {
+      "id": "5cae5f18fa0a012e4a6bb09e"
+    },
+    "banner": {
+      "name": "banner",
+      "type": "banner",
+      "fileName": "2851c3e7-d1e8-4c5b-8e5c-aaf6c7ae270e.png",
+      "url": "https://s3-us-west-2.amazonaws.com/ptv.broadcast-comdev/channels/5cae5f18fa0a012e4a6bb09e/overlays/images/2851c3e7-d1e8-4c5b-8e5c-aaf6c7ae270e.png",
+      "s3url": "https://s3-us-west-2.amazonaws.com/ptv.broadcast-comdev/channels/5cae5f18fa0a012e4a6bb09e/overlays/images/2851c3e7-d1e8-4c5b-8e5c-aaf6c7ae270e.png",
+      "eTag": "{\"ETag\":\"\\\"b400734eb9f7adb5d0ca125081307046\\\"\"}",
+      "_id": "5cb6119567bff26435ec07ac",
+      "height": 466,
+      "width": 1400,
+      "created": "2019-04-16T17:32:05.913Z",
+      "user": "5cae5f18fa0a012e4a6bb09e",
+      "__v": 0
+    },
+    "thumbnail": {
+      "name": "thumb",
+      "type": "thumb",
+      "fileName": "d626e400-b4d8-4629-8b1c-94d474d024fa.png",
+      "url": "https://s3-us-west-2.amazonaws.com/ptv.broadcast-comdev/channels/5cae5f18fa0a012e4a6bb09e/overlays/images/d626e400-b4d8-4629-8b1c-94d474d024fa.png",
+      "s3url": "https://s3-us-west-2.amazonaws.com/ptv.broadcast-comdev/channels/5cae5f18fa0a012e4a6bb09e/overlays/images/d626e400-b4d8-4629-8b1c-94d474d024fa.png",
+      "eTag": "{\"ETag\":\"\\\"347f95d97e724e621e274eadda0ea393\\\"\"}",
+      "_id": "5cb6119567bff26435ec07ab",
+      "height": 300,
+      "width": 300,
+      "created": "2019-04-16T17:32:05.892Z",
+      "user": "5cae5f18fa0a012e4a6bb09e",
+      "__v": 0
+    },
+    "createdAt": "2019-04-16T17:32:05.915Z",
+    "updatedAt": "2020-12-03T19:33:39.648Z",
+    "backgroundColor": "rgb(154,233,249)",
+    "channelStatus": "active",
+    "platform": {
+      "_id": "5c06550380926b1877f2ea1e",
+      "name": "twitchtv",
+      "label": "Twitch TV",
+      "description": "Twitch is a live streaming video platform owned by Twitch Interactive, a subsidiary of Amazon. https://www.twitch.tv/",
+      "image": "twitchtv.png",
+      "icon": "twitchtv_icon.png",
+      "enabled": true,
+      "lockToPlatform": false,
+      "created": "2018-12-04T10:20:51.429Z",
+      "__v": 0,
+      "permissions": [
+        "site:use"
+      ],
+      "suportedStreamTypes": [
+        "VOD",
+        "Live",
+        "VirtualLive",
+        "VirtualVOD"
+      ],
+      "supportedPlayerTypes": [
+        "5ec6c695d1141e001b210abd"
+      ],
+      "defaultPlayerType": "5ec6c695d1141e001b210abd"
+    }
+  },
+  "streamStatus": "active",
+  "streamId": "5d55ba32b4ce5d66fd179340",
+  "stream": {
+    "_id": "5d55ba32b4ce5d66fd179340",
+    "name": "Solo Triple Threat Challenge | !headset | @DrDisrespect",
+    "description": "",
+    "sources": [],
+    "timeline": {
+      "time": 1,
+      "autoFollow": true
+    },
+    "user": {
+      "id": "5cae5f18fa0a012e4a6bb09e"
+    },
+    "streamType": "VOD",
+    "streamStatus": "active",
+    "platform": {
+      "id": "twitchtv",
+      "name": "TwitchTV",
+      "type": "video/twitch",
+      "icon": "/modules/core/client/img/platforms/twitch_icon.png",
+      "platformStreamId": "35308717568"
+    },
+    "src": "https://www.twitch.tv/?video=v467683601",
+    "start": "2019-08-15T20:00:13.000Z",
+    "playerSettings": {
+      "debugPlayersOnly": false,
+      "showOverlays": {
+        "iOS": true,
+        "android": true,
+        "desktop": true,
+        "smartTV": true
+      }
+    },
+    "createdAt": "2019-08-15T20:01:54.256Z",
+    "updatedAt": "2020-12-03T19:33:39.585Z",
+    "durationSeconds": 14791,
+    "container": {
+      "width": 1920,
+      "height": 1080,
+      "surface": "player_surface"
+    },
+    "id": "5d55ba32b4ce5d66fd179340",
+    "activations": [
+      {
+        "name": "Restaurant HTML iFrame",
+        "duration": null,
+        "trigger": "User",
+        "status": "active",
+        "_id": "5d8b21a1d6a18316b44a70cf",
+        "start": 0,
+        "durationViewAs": "never",
+        "overlayId": "5d8b21a1d6a18316b44a70ca",
+        "startAt": "2019-09-25T08:13:21.836Z",
+        "channel": "5cb6119567bff26435ec07a9",
+        "stream": "5d55ba32b4ce5d66fd179340",
+        "user": {
+          "id": "5cae5f18fa0a012e4a6bb09e"
+        },
+        "__v": 0,
+        "createdAt": "2019-09-25T08:13:21.839Z",
+        "updatedAt": "2020-12-03T19:33:39.633Z",
+        "end": null,
+        "liveFor": null,
+        "id": "5d8b21a1d6a18316b44a70cf",
+        "server_time": 1613636044194,
+        "overlay": {
+          "name": "Restaurant HTML iFrame",
+          "id": "5d8b21a1d6a18316b44a70ca",
+          "container": {
+            "width": 1920,
+            "height": 1080
+          },
+          "data": {
+            "hotspots": [
+              {
+                "assets": {
+                  "images": [],
+                  "videos": []
+                },
+                "isSizeInPxToCanvas": true,
+                "isResizable": true,
+                "hasPlatforms": true,
+                "size": {
+                  "height": 80,
+                  "width": 25
+                },
+                "position": {
+                  "top": 5.1851851852,
+                  "left": 71.25,
+                  "ratio": false,
+                  "zIndex": 1
+                },
+                "anchor": {
+                  "x": 0,
+                  "y": 0,
+                  "positionName": "center_top"
+                },
+                "properties": {
+                  "opacity": 100,
+                  "behaviourOnEnter": "fade_in",
+                  "behaviourOnClick": "none",
+                  "behaviourOnExit": "fade_out",
+                  "behaviourOnAdBreak": "hide_for_duration",
+                  "dismissAfter": 40,
+                  "aspectRatio": true,
+                  "border": {
+                    "thickness": 0,
+                    "color": "#FFC0CB"
+                  },
+                  "allowTransparency": true,
+                  "html": "",
+                  "behaviourOnEnterDuration": 500,
+                  "behaviourOnExitDuration": 500,
+                  "grabberCondition": "on_overlay_hover",
+                  "grabberPosition": "center_top",
+                  "grabberStyle": "simple_light",
+                  "grabberText": "CLICK HERE",
+                  "isGrabberEnabled": false,
+                  "grabberHideAfter": 20
+                },
+                "desktop": {
+                  "properties": {
+                    "opacity": 100
+                  },
+                  "size": {
+                    "height": 80,
+                    "width": 25
+                  },
+                  "html": null,
+                  "sourceUrl": null,
+                  "useDesktopCode": false,
+                  "iframeCodeSource": "html",
+                  "scrollOffset": {
+                    "top": 0,
+                    "left": 0
+                  },
+                  "contentPath": "https://comdev.broadcast.promethean.tv/iframe/desktop/f3259090-06d9-47cc-8f52-e7d845b48890.html",
+                  "enableScrollbar": true,
+                  "isResponsive": true
+                },
+                "ios": {
+                  "properties": {
+                    "opacity": 100
+                  },
+                  "size": {
+                    "height": 25,
+                    "width": 25
+                  },
+                  "enable": false,
+                  "html": null,
+                  "sourceUrl": null,
+                  "useDesktopCode": true,
+                  "iframeCodeSource": "none",
+                  "scrollOffset": {
+                    "top": 0,
+                    "left": 0
+                  },
+                  "contentPath": "",
+                  "enableScrollbar": true
+                },
+                "android": {
+                  "properties": {
+                    "opacity": 100
+                  },
+                  "size": {
+                    "height": 25,
+                    "width": 25
+                  },
+                  "enable": false,
+                  "html": null,
+                  "sourceUrl": null,
+                  "useDesktopCode": true,
+                  "iframeCodeSource": "none",
+                  "scrollOffset": {
+                    "top": 0,
+                    "left": 0
+                  },
+                  "contentPath": "",
+                  "enableScrollbar": true
+                },
+                "selectedPlatformContent": "desktop",
+                "dismiss": {
+                  "enable": true,
+                  "style": "icon",
+                  "stradling": "default",
+                  "position": "right_top",
+                  "appearsOnHover": {
+                    "enable": true,
+                    "tooltip": "This setting applies to desktop only"
+                  }
+                },
+                "inResizing": false,
+                "smartTV": {
+                  "html": null,
+                  "sourceUrl": null,
+                  "useDesktopCode": false,
+                  "isResponsive": true,
+                  "iframeCodeSource": "none",
+                  "scrollOffset": {
+                    "top": 0,
+                    "left": 0
+                  },
+                  "size": {
+                    "width": 39.4792,
+                    "height": 42.1296
+                  },
+                  "contentPath": "",
+                  "enableScrollbar": true
+                }
+              }
+            ],
+            "hotspotIndex": 0
+          },
+          "enabled": true,
+          "live": true,
+          "visibility": false,
+          "type": {
+            "name": "HTML iFrame",
+            "propertyName": "HTML iFrame",
+            "shortDescription": "Add an overlay with custom HTML code to embed web widgets onto the stream.",
+            "description": "Add an overlay with custom HTML code to embed web widgets onto the stream.",
+            "icon": "custom-html",
+            "image": "custom-html.png",
+            "categories": [
+              "Basic Overlays"
+            ]
+          },
+          "frequencyCapping": {
+            "LimitedByTime": -1
+          },
+          "context": {},
+          "devices": [
+            "desktop",
+            "ios",
+            "android",
+            "smartTV"
+          ],
+          "locations": [],
+          "showIfLocationUnknown": true
+        }
+      },
+      {
+        "name": "Restaurant HTML iFrame",
+        "duration": null,
+        "trigger": "User",
+        "status": "active",
+        "_id": "5d8b21a1d6a18316b44a70d0",
+        "start": 115,
+        "durationViewAs": "never",
+        "overlayId": "5d8b21a1d6a18316b44a70ca",
+        "startAt": "2019-09-25T08:13:21.837Z",
+        "channel": "5cb6119567bff26435ec07a9",
+        "stream": "5d55ba32b4ce5d66fd179340",
+        "user": {
+          "id": "5cae5f18fa0a012e4a6bb09e"
+        },
+        "__v": 0,
+        "createdAt": "2019-09-25T08:13:21.839Z",
+        "updatedAt": "2019-09-25T08:13:21.839Z",
+        "end": null,
+        "liveFor": null,
+        "id": "5d8b21a1d6a18316b44a70d0",
+        "server_time": 1613636044194,
+        "overlay": {}
+      },
+      {
+        "name": "Image",
+        "duration": null,
+        "trigger": "User",
+        "status": "active",
+        "_id": "5fc93d93f6dc42644d85e1f9",
+        "start": 0,
+        "durationViewAs": "never",
+        "overlayId": "5d8b3b72d6a18316b44a747a",
+        "startAt": "2020-12-03T19:33:39.629Z",
+        "channel": "5cb6119567bff26435ec07a9",
+        "stream": "5d55ba32b4ce5d66fd179340",
+        "user": {
+          "id": "5cae5f18fa0a012e4a6bb09e"
+        },
+        "__v": 0,
+        "createdAt": "2020-12-03T19:33:39.632Z",
+        "updatedAt": "2020-12-03T19:33:39.632Z",
+        "end": null,
+        "liveFor": null,
+        "id": "5fc93d93f6dc42644d85e1f9",
+        "server_time": 1613636044194,
+        "overlay": {
+          "name": "Image",
+          "id": "5d8b3b72d6a18316b44a747a",
+          "container": {
+            "width": 1920,
+            "height": 1080
+          },
+          "data": {
+            "hotspots": [
+              {
+                "assets": {
+                  "images": [],
+                  "videos": []
+                },
+                "isSizeInPxToCanvas": true,
+                "isResizable": false,
+                "hasPlatforms": true,
+                "size": {
+                  "height": 28.8888888889,
+                  "width": 30.5914993791
+                },
+                "position": {
+                  "top": 23.7037037037,
+                  "left": 37.2550455729,
+                  "ratio": true,
+                  "zIndex": 4
+                },
+                "anchor": {
+                  "x": 0,
+                  "y": 0,
+                  "positionName": "center_top"
+                },
+                "properties": {
+                  "opacity": 100,
+                  "behaviourOnEnter": "fade_in",
+                  "behaviourOnClick": "open_url",
+                  "behaviourOnExit": "fade_out",
+                  "behaviourOnAdBreak": "hide_for_duration",
+                  "dismissAfter": 40,
+                  "aspectRatio": true,
+                  "behaviourOnEnterDuration": 500,
+                  "behaviourOnExitDuration": 500,
+                  "grabberCondition": "on_overlay_hover",
+                  "grabberPosition": "center_top",
+                  "grabberStyle": "simple_light",
+                  "grabberText": "CLICK HERE",
+                  "isGrabberEnabled": false,
+                  "grabberHideAfter": 20
+                },
+                "desktop": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 28.8888888889,
+                    "width": 30.5914993791
+                  },
+                  "images": [
+                    {
+                      "_id": "5d8b3b68d6a18316b44a746b",
+                      "url": "https://s3-us-west-2.amazonaws.com/ptv.broadcast-comdev/channels/5cae5f18fa0a012e4a6bb09e/overlays/images/d1dd55fc-4c4f-4095-b841-43c9b78e7ad5.png",
+                      "gifPreviewUrl": "https://s3-us-west-2.amazonaws.com/ptv.broadcast-comdev/channels/5cae5f18fa0a012e4a6bb09e/overlays/images/d1dd55fc-4c4f-4095-b841-43c9b78e7ad5.png",
+                      "width": 433,
+                      "height": 230,
+                      "name": "car.png",
+                      "fileName": "d1dd55fc-4c4f-4095-b841-43c9b78e7ad5.png"
+                    }
+                  ]
+                },
+                "ios": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 16.67,
+                    "width": 11.46
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/image-ios.png"
+                    }
+                  ]
+                },
+                "android": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 16.67,
+                    "width": 11.46
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/image-android.png"
+                    }
+                  ]
+                },
+                "smartTV": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 10,
+                    "width": 24.38
+                  },
+                  "enable": false,
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/image-smart-tv.png"
+                    }
+                  ]
+                },
+                "selectedPlatformContent": "desktop",
+                "inResizing": false
+              }
+            ],
+            "hotspotIndex": 0
+          },
+          "enabled": true,
+          "live": true,
+          "visibility": false,
+          "frequencyCapping": {
+            "LimitedByTime": -1
+          },
+          "type": {
+            "name": "Image",
+            "propertyName": "Image",
+            "shortDescription": "",
+            "description": "Add a static image (JPG/PNG) to your screen with a target URL on click.",
+            "icon": "image",
+            "image": "image_overlay.png",
+            "categories": [
+              "Basic Overlays"
+            ]
+          },
+          "context": {},
+          "devices": [
+            "desktop",
+            "ios",
+            "android",
+            "smartTV"
+          ],
+          "locations": [],
+          "showIfLocationUnknown": true
+        }
+      },
+      {
+        "name": "GIF Animation",
+        "duration": null,
+        "trigger": "User",
+        "status": "active",
+        "_id": "5fc93d93f6dc426f1985e1fa",
+        "start": 0,
+        "durationViewAs": "never",
+        "overlayId": "5d8b3b72d6a18316b44a7478",
+        "startAt": "2020-12-03T19:33:39.630Z",
+        "channel": "5cb6119567bff26435ec07a9",
+        "stream": "5d55ba32b4ce5d66fd179340",
+        "user": {
+          "id": "5cae5f18fa0a012e4a6bb09e"
+        },
+        "__v": 0,
+        "createdAt": "2020-12-03T19:33:39.632Z",
+        "updatedAt": "2020-12-03T19:33:39.632Z",
+        "end": null,
+        "liveFor": null,
+        "id": "5fc93d93f6dc426f1985e1fa",
+        "server_time": 1613636044194,
+        "overlay": {
+          "name": "GIF Animation",
+          "id": "5d8b3b72d6a18316b44a7478",
+          "container": {
+            "width": 1920,
+            "height": 1080,
+            "staticWidth": 1920,
+            "staticHeight": 1080
+          },
+          "data": {
+            "hotspots": [
+              {
+                "assets": {
+                  "images": [],
+                  "videos": []
+                },
+                "isSizeInPxToCanvas": true,
+                "isResizable": false,
+                "hasPlatforms": true,
+                "size": {
+                  "height": 14.26,
+                  "width": 27.083
+                },
+                "position": {
+                  "top": 60.7407407407,
+                  "left": 3.3333333333,
+                  "ratio": true,
+                  "zIndex": 3
+                },
+                "anchor": {
+                  "x": 0,
+                  "y": 0,
+                  "positionName": "center_top"
+                },
+                "properties": {
+                  "opacity": 100,
+                  "behaviourOnEnter": "fade_in",
+                  "behaviourOnClick": "open_url",
+                  "behaviourOnExit": "fade_out",
+                  "behaviourOnAdBreak": "hide_for_duration",
+                  "dismissAfter": 40,
+                  "aspectRatio": true,
+                  "behaviourOnEnterDuration": 500,
+                  "behaviourOnExitDuration": 500,
+                  "grabberCondition": "on_overlay_hover",
+                  "grabberPosition": "center_top",
+                  "grabberStyle": "simple_light",
+                  "grabberText": "CLICK HERE",
+                  "isGrabberEnabled": false,
+                  "grabberHideAfter": 20
+                },
+                "desktop": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 14.26,
+                    "width": 27.083
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/gif-animation-desktop.gif",
+                      "gifStatic": "/api/assets?name=gif-animation-static-desktop.png"
+                    }
+                  ]
+                },
+                "ios": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 15.926,
+                    "width": 20.47
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/gif-animation-ios.gif",
+                      "gifStatic": "/api/assets?name=gif-animation-static-ios.png"
+                    }
+                  ]
+                },
+                "android": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 15.926,
+                    "width": 20.47
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/gif-animation-android.gif",
+                      "gifStatic": "/api/assets?name=gif-animation-static-android.png"
+                    }
+                  ]
+                },
+                "smartTV": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 14.26,
+                    "width": 27.083
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/gif-animation-smart-tv.gif",
+                      "gifStatic": "/api/assets?name=gif-animation-static-smart-tv.png"
+                    }
+                  ]
+                },
+                "selectedPlatformContent": "desktop",
+                "gifAnimate": {
+                  "stopped": true,
+                  "gifLoop": false,
+                  "includeAudio": false,
+                  "volume": 100,
+                  "audioLoop": false
+                },
+                "dismiss": {
+                  "enable": true,
+                  "style": "icon",
+                  "stradling": "default",
+                  "position": "right_top"
+                },
+                "inResizing": false
+              }
+            ],
+            "hotspotIndex": 0
+          },
+          "enabled": true,
+          "live": true,
+          "visibility": false,
+          "frequencyCapping": {
+            "LimitedByTime": -1
+          },
+          "type": {
+            "name": "GIF Animation",
+            "propertyName": "GIF Animation",
+            "shortDescription": "Add an Animated GIF to your screen with additional play looping options. with a target URL on click.",
+            "description": "Add an Animated GIF to your screen with additional play looping options. with a target URL on click.",
+            "icon": "gif-animation",
+            "image": "gif-animation.gif",
+            "categories": [
+              "Basic Overlays"
+            ]
+          },
+          "context": {},
+          "devices": [
+            "desktop",
+            "ios",
+            "android",
+            "smartTV"
+          ],
+          "locations": [],
+          "showIfLocationUnknown": true
+        }
+      },
+      {
+        "name": "Banner",
+        "duration": null,
+        "trigger": "User",
+        "status": "active",
+        "_id": "5fc93d93f6dc4251c585e1fb",
+        "start": 0,
+        "durationViewAs": "never",
+        "overlayId": "5d8b3b72d6a18316b44a7476",
+        "startAt": "2020-12-03T19:33:39.630Z",
+        "channel": "5cb6119567bff26435ec07a9",
+        "stream": "5d55ba32b4ce5d66fd179340",
+        "user": {
+          "id": "5cae5f18fa0a012e4a6bb09e"
+        },
+        "__v": 0,
+        "createdAt": "2020-12-03T19:33:39.632Z",
+        "updatedAt": "2020-12-03T19:33:39.632Z",
+        "end": null,
+        "liveFor": null,
+        "id": "5fc93d93f6dc4251c585e1fb",
+        "server_time": 1613636044194,
+        "overlay": {
+          "name": "Banner",
+          "id": "5d8b3b72d6a18316b44a7476",
+          "container": {
+            "width": 1920,
+            "height": 1080
+          },
+          "data": {
+            "hotspots": [
+              {
+                "assets": {
+                  "images": [],
+                  "videos": []
+                },
+                "isSizeInPxToCanvas": true,
+                "isResizable": false,
+                "hasPlatforms": true,
+                "size": {
+                  "height": 11.85,
+                  "width": 53.33
+                },
+                "position": {
+                  "top": 95.9259259259,
+                  "left": 2.0833333333,
+                  "ratio": true,
+                  "zIndex": 2
+                },
+                "anchor": {
+                  "x": 0,
+                  "y": 1,
+                  "positionName": "left_bottom"
+                },
+                "properties": {
+                  "opacity": 100,
+                  "behaviourOnEnter": "fade_in",
+                  "behaviourOnClick": "open_url_exit",
+                  "behaviourOnExit": "fade_out",
+                  "behaviourOnAdBreak": "hide_for_duration",
+                  "dismissAfter": 40,
+                  "aspectRatio": true,
+                  "behaviourOnEnterDuration": 500,
+                  "behaviourOnExitDuration": 500,
+                  "grabberCondition": "on_overlay_hover",
+                  "grabberPosition": "center_top",
+                  "grabberStyle": "simple_light",
+                  "grabberText": "CLICK HERE",
+                  "isGrabberEnabled": false,
+                  "grabberHideAfter": 20
+                },
+                "desktop": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": "ltp://www.hotweel.co"
+                  },
+                  "size": {
+                    "height": 11.85,
+                    "width": 53.33
+                  },
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/banner-desktop.jpg"
+                    }
+                  ]
+                },
+                "ios": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 15.83,
+                    "width": 53.33
+                  },
+                  "enable": false,
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/banner-ios.jpg"
+                    }
+                  ]
+                },
+                "android": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 15.83,
+                    "width": 53.33
+                  },
+                  "enable": false,
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/banner-android.jpg"
+                    }
+                  ]
+                },
+                "smartTV": {
+                  "properties": {
+                    "opacity": 100,
+                    "href": ""
+                  },
+                  "size": {
+                    "height": 11.85,
+                    "width": 53.33
+                  },
+                  "enable": false,
+                  "images": [
+                    {
+                      "url": "https://comdev.broadcast.promethean.tv/assets/images/banner-smart-tv.jpg"
+                    }
+                  ]
+                },
+                "selectedPlatformContent": "desktop",
+                "dismiss": {
+                  "enable": true,
+                  "style": "icon",
+                  "stradling": "default",
+                  "position": "right_top",
+                  "appearsOnHover": {
+                    "enable": true,
+                    "tooltip": "This setting applies to desktop only"
+                  }
+                },
+                "inResizing": false
+              }
+            ],
+            "hotspotIndex": 0
+          },
+          "enabled": true,
+          "live": true,
+          "visibility": false,
+          "frequencyCapping": {
+            "LimitedByTime": -1
+          },
+          "type": {
+            "name": "Banner",
+            "propertyName": "Banner",
+            "shortDescription": "",
+            "description": "Add a static banner image (JPG/PNG) to your screen with dismiss button options and a target URL on click.",
+            "icon": "banner",
+            "image": "banner_overlay.png",
+            "categories": [
+              "Basic Overlays"
+            ]
+          },
+          "context": {},
+          "devices": [
+            "desktop",
+            "ios",
+            "android",
+            "smartTV"
+          ],
+          "locations": [],
+          "showIfLocationUnknown": true
+        }
+      }
+    ],
+    "type": "video/twitch"
+  },
+  "firebase": {
+    "apiKey": "AIzaSyD-rhmvwOfjutZQ54ZKI_5z64E0n9hVw_0",
+    "authDomain": "ptv-broadcast-center-com-dev.firebaseapp.com",
+    "messagingSenderId": "119369019533",
+    "bundleId": "com.promethean.player",
+    "clientId": "865181769385-10qqic56ko6j3ao2que020k2jr950fap.apps.googleusercontent.com",
+    "clientIdIos": "865181769385-0u5a6b831l6e0vp65k5vgkne1fparbjt.apps.googleusercontent.com",
+    "googleApiId": "1:865181769385:ios:701687f7c63665fd",
+    "configFile": "ptv-broadcast-center-com-dev-firebase-adminsdk-sf4ma-7a0d57236b.json",
+    "databaseURL": "https://ptv-broadcast-center-com-dev.firebaseio.com",
+    "projectId": "ptv-broadcast-center-com-dev",
+    "storageBucket": "ptv-broadcast-center-com-dev.appspot.com",
+    "dbs": [
+      "https://ptv-broadcast-center-com-dev.firebaseio.com",
+      "https://ptv-broadcast-center-com-dev-02.firebaseio.com",
+      "https://ptv-broadcast-center-com-dev-03.firebaseio.com"
+    ]
+  },
+  "advertisements": {
+    "ima": {
+      "androidAdTagUrl": "",
+      "iOSAdTagUrl": "",
+      "webAdTagUrl": "",
+      "enableIMA3Ad": false,
+      "adTagUrl": ""
+    }
+  },
+  "analytics": {
+    "mux": {
+      "data": {
+        "property_key": "Tb3KMYb2WAiAa9bBgouftgYrS",
+        "page_type": "iframe",
+        "experiment_name": "PTV Web Player",
+        "sub_property_id": "1280+dev.c3cb010f",
+        "video_id": "5d55ba32b4ce5d66fd179340",
+        "video_title": "Solo Triple Threat Challenge | !headset | @DrDisrespect",
+        "video_series": "",
+        "video_producer": "DrDisrespect",
+        "video_content_type": "stream",
+        "video_language_code": "en",
+        "video_variant_name": "DrDisrespect",
+        "video_variant_id": "5cb6119567bff26435ec07a9",
+        "video_duration": "",
+        "video_stream_type": "VOD",
+        "video_encoding_variant": "",
+        "video_cdn": "TwitchTV"
+      }
+    },
+    "insights": {
+      "baseUrl": "https://dev.ingest.analytics.promethean.tv",
+      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Y2FlNWYxOGZhMGEwMTJlNGE2YmIwOWUiLCJpYXQiOjE2MTM2MzYwNTEsImF1ZCI6ImNvbWRldi5icm9hZGNhc3QucHJvbWV0aGVhbi50diIsImlzcyI6IlByb21ldGhlYW4gSWduaXRlIFZpZGVvIiwic3ViIjoic2RrIn0.JxStQc-741V1Vz0a8Kg9ARI-ZKuaPFORAfyI-8IgxTmnnpTmsUu4tkcuN675Ioyjvlz7EybBEHNy_yO2BMD-mg"
+    }
+  },
+  "poster": {
+    "loading": {
+      "url": "https://comdev.broadcast.promethean.tv/assets/images/ptv-poster-1.jpg",
+      "title": "Solo Triple Threat Challenge | !headset | @DrDisrespect",
+      "subtitle": ""
+    },
+    "offline": {
+      "url": "https://comdev.broadcast.promethean.tv/assets/images/ptv-poster-1.jpg",
+      "title": "Solo Triple Threat Challenge | !headset | @DrDisrespect",
+      "subtitle": ""
+    }
+  },
+  "src": "https://www.twitch.tv/?video=v467683601",
+  "sources": [],
+  "type": "video/twitch"
+}
