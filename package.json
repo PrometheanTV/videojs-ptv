@@ -1,6 +1,6 @@
 {
   "name": "@ptv.js/videojs-ptv",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "A video.js plugin for the Promethean TV SDK.",
   "homepage": "https://github.com/PrometheanTV/videojs-ptv",
   "main": "dist/videojs-ptv.cjs.js",
